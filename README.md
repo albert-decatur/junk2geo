@@ -1,5 +1,5 @@
 junk2geo
-=========
+========
 
 **Warning**
 This is for patient people with very bad input data!
@@ -17,14 +17,14 @@ We preserve the original text which was matched as well as the output geocoded p
 
 
 Prerequisites
-==============
+=============
 
 * GNU parallel
 * tre-agrep
 * mawk
 
 How To
-=================
+======
 
 ```bash
 sudo apt-get install parallel tre-agrep mawk
