@@ -4,3 +4,5 @@ TODO
 * script to split geonames and user input TSV by ISO2(s)
 * script to grab geonames allCountries.txt, split that by ISO2 and recombine according to user ISO2(s) - can be multiple
 * rewrite to allow arbitrary input, as per current help text
+* calc sha1sum for input text strings to join back later, and for match/placename strings
+* take just uniq strings to geocode after splitting by iso2(s)
