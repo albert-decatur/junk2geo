@@ -2,6 +2,7 @@ junk2geo
 ========
 
 **Warning**
+
 This is for patient people with very bad input data!
 Many faster solutions exist which work very well on inputs that have rich context and are well formated.
 
