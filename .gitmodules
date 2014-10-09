@@ -1,0 +1,3 @@
+[submodule "geonames2sqlite"]
+	path = geonames2sqlite
+	url = git@github.com:albert-decatur/geonames2sqlite.git
