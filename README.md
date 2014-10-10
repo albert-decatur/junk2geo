@@ -8,9 +8,9 @@ junk2geo's niche is extremely messy and brief text, especially multi-lingual / m
 It also lets you filter the output according to indicators like Double Metaphone and Levenshtein distance.
 Your TSV input needs two columns: 
 
-  1. ISO3 alpha codes related to the text
-    1. If multiple ISO3s may apply them pipe separate them like so: AFG|EGY|MAR
-    1. If no applicable ISO3 is know simply leave the column blank.
+  1. ISO2 alpha codes related to the text
+    1. If multiple ISO2s may apply them pipe separate them like so: IR|US|CN
+    1. If no applicable ISO2 is know simply leave the column blank.
   2. input text to geocode
 
 We preserve the original text which was matched as well as the output geocoded placename, which is great for reviewing accuracy later.

@@ -13,9 +13,11 @@ OPTIONS:
    -h      show this message
    -e      number of errors to allow in matched text. This is according to tre-agrep.
    -g      input GeoNames SQLite database made by https://github.com/albert-decatur/geonames2sqlite
-   -i      input TSV to geocode, with two columns: 1) country ISO3(s), 2) text to geocode.
+   -i      input TSV to geocode, with two columns: 1) country ISO2(s), 2) text to geocode. 
 
-Example: $0 -e 1 -g geonames/geonames_2014-10-02.sqlite -i input.tsv
+Multiple values of ISO2 ought to be pipe separated in the second column of the input TSV (using the -i flag) like so: IR|US|CN.
+If no ISO2 is appropriate simply do not include any. 
+Example use: $0 -e 1 -g geonames/geonames_2014-10-02.sqlite -i input.tsv
 
 EOF
 }
