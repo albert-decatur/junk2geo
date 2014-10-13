@@ -9,7 +9,7 @@ It also lets you filter the output according to indicators like Double Metaphone
 Your TSV input needs two columns: 
 
   1. ISO2 alpha codes related to the text
-    1. If multiple ISO2s may apply them pipe separate them like so: IR|US|CN
+    1. If multiple ISO2s may apply then pipe separate them like so: IR|US|CN
     1. If no applicable ISO2 is know simply leave the column blank.
   2. input text to geocode
 
@@ -68,8 +68,3 @@ How it Works
 4. use the smaller set to search for matches in the larger set
   4. note that if the text to geocode is the small set, an intermediate set of geonames is made by searching for each input term in the appropriate geonames ISO2 table
 5. output geonames information for each input record, along with the text that used to determine the match
-
-TODO:
-junk2geo will always search for smaller sets in larger sets.
-For example, if the text to geocode is very large and the set of possible placenames is small then we search for the placenames in the text.
-However, if the text to geocode is small and the set of possible placenames is large ( for example when a list of countries is not known ) then we search for the text in the list of placenames.
