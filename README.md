@@ -41,13 +41,13 @@ How To
 ======
 
 ```bash
-sudo apt-get install parallel tre-agrep mawk
+sudo apt-get install parallel agrep tre-agrep mawk
 git clone https://github.com/albert-decatur/junk2geo.git
 cd junk2geo/
 chmod +x *.sh
-./junk2geo.sh input.tsv output.tsv
-./match_metrics.sh output.tsv output_qa.tsv
-./match_metrics.sh output_qa.tsv -l 3 -m 1 -s 4 -a > worthy_matches.tsv
+./junk2geo.sh -g geonames/geonames_2014-10-02.sqlite -i test/test.tsv -o output.tsv
+./match_metrics.sh output.tsv metrics.tsv
+./match_metrics.sh metrics.tsv -l 3 -m 1 -s 4 -a > worthy_matches.tsv
 ```
 
 Use

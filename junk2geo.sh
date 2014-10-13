@@ -4,6 +4,7 @@
 # 1. add optional flag to clear non-standard tables from sqlite db - eg, ISO2 list tables
 # 2. add flag for not using alt names
 # 3. add flag for ignoring country names
+# 3. add flag to just generate iso2 tables in sqlite db (complement to just deleting them)
 
 usage()
 {
