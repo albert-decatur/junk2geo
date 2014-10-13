@@ -7,6 +7,7 @@
 # 4. add flag to just generate iso2 tables in sqlite db (complement to just deleting them)
 # 5. be more concise in help / comments
 # 6. add -S options from flag for GNU parallel so can be run on multi host
+# 7. search for geonames terms not just when doc gow is smaller than geonames for iso2, but when it's smaller by some multiple - b/c each doc bow term can be associated with many geonames terms
 
 usage()
 {
