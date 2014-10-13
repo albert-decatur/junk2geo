@@ -31,9 +31,11 @@ Prerequisites
 =============
 
 * GNU parallel
+* agrep
 * tre-agrep
 * mawk
 
+Why agrep **and** tre-agrep?  The first is very fast, and the second can show you the exact pattern that was matched.
 
 How To
 ======
@@ -49,7 +51,25 @@ chmod +x *.sh
 ```
 
 Use
-============
+===
 
 Scripts are separated such that slow tasks can be run once, but faster tasks like filtering by quality metrics can be repeated easily and quickly.
 GNU parallel allows junk2geo.sh to be run on an arbitrary number of hosts.
+
+Note that you can greatly speed up performance on repeatative datasets by finding only unique values that should matter to geocoding.
+For example, if you start with a 2.7m record OECD CRS dataset, try taking unique values of just fields that have geocodeable information, and use this input to join back to the original after geocoding.
+
+How it Works
+============
+
+1. make a SQLite table of geonames for each unique combination of ISO2s found in the user provided TSV
+2. make a body of text to geocode for each unique combination of ISO2s found in the user provided TSV
+3. determine which is smaller - the geonames or the text to geocode
+4. use the smaller set to search for matches in the larger set
+  4. note that if the text to geocode is the small set, an intermediate set of geonames is made by searching for each input term in the appropriate geonames ISO2 table
+5. output geonames information for each input record, along with the text that used to determine the match
+
+TODO:
+junk2geo will always search for smaller sets in larger sets.
+For example, if the text to geocode is very large and the set of possible placenames is small then we search for the placenames in the text.
+However, if the text to geocode is small and the set of possible placenames is large ( for example when a list of countries is not known ) then we search for the text in the list of placenames.
