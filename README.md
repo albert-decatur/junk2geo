@@ -62,9 +62,20 @@ For example, if you start with a 2.7m record OECD CRS dataset, try taking unique
 How it Works
 ============
 
+junk2geo.sh
+
 1. make a SQLite table of geonames for each unique combination of ISO2s found in the user provided TSV
 2. make a body of text to geocode for each unique combination of ISO2s found in the user provided TSV
 3. determine which is smaller - the geonames or the text to geocode
+  1. multiply the number of doc terms by a large number, eg 500, because for every doc term many candidate geonames will be found by fuzzy text match
 4. use the smaller set to search for matches in the larger set
-  4. note that if the text to geocode is the small set, an intermediate set of geonames is made by searching for each input term in the appropriate geonames ISO2 table
-5. output geonames information for each input record, along with the text that used to determine the match
+  4. note that if the text to geocode is the small set, an intermediate set of geonames is made by searching for each input term in the appropriate geonames ISO2 table, using agrep for speed
+5. use tre-agrep to get both the records that were matched and their character positions in those records
+6. pull out the matched text and the geonames candidates for each ISO2 unique set
+7. use the match text to join geonames candidates to each input record, and present this along with the geonames candidates
+
+match_metrics.sh
+
+1. use the output from junk2geo.sh to make a series of new fields with string metrics comparing the matched text and the geonames candidates
+2. filter out geonames candidates according to poor performance in metrics of your choice (eg, sound does not match according to Double Metaphone)
+3. dupdplicate geonames alternate names for the same place (eg a place that was matched in both Italian and Spanish should appear as a single match)
