@@ -16,6 +16,14 @@ Your TSV input needs two columns:
 We preserve the original text which was matched as well as the output geocoded placename, which is great for reviewing accuracy later.
 String metrics can be calculated with the script match_metrics.sh.
 
+Some features include:
+
+* choose whether to use GeoNames alternate names (non-English names)
+* choose whether to filter by a stopword list
+  * this applies to both the output matched text and the input GeoNames text
+* choose whether to filter by length
+  * this applies to both the output matched text and the input GeoNames text
+
 **Warning**
 
 junk2geo is for patient people with very bad input data!
@@ -47,16 +55,13 @@ sudo apt-get install parallel agrep tre-agrep mawk
 git clone https://github.com/albert-decatur/junk2geo.git
 cd junk2geo/
 chmod +x *.sh
-./junk2geo.sh -g geonames/geonames_2014-10-02.sqlite -i test/test.tsv -o output.tsv
-./match_metrics.sh output.tsv metrics.tsv
+./junk2geo.sh -g geonames/geonames_2014-10-02.sqlite -i test/test.tsv > output.tsv
+./match_metrics.sh output.tsv > metrics.tsv
 ./match_metrics.sh metrics.tsv -l 3 -m 1 -s 4 -a > worthy_matches.tsv
 ```
 
-Use
-===
-
 Scripts are separated such that slow tasks can be run once, but faster tasks like filtering by quality metrics can be repeated easily and quickly.
-GNU parallel allows junk2geo.sh to be run on an arbitrary number of hosts.
+GNU parallel allows junk2geo.sh to be run on an arbitrary number of hosts as long as the GeoName SQLite database and the input TSV are available on each.
 
 Note that you can greatly speed up performance on repeatative datasets by finding only unique values that should matter to geocoding.
 For example, if you start with a 2.7m record OECD CRS dataset, try taking unique values of just fields that have geocodeable information, and use this input to join back to the original after geocoding.
@@ -80,4 +85,4 @@ match_metrics.sh
 
 1. use the output from junk2geo.sh to make a series of new fields with string metrics comparing the matched text and the geonames candidates
 2. filter out geonames candidates according to poor performance in metrics of your choice (eg, sound does not match according to Double Metaphone)
-3. dupdplicate geonames alternate names for the same place (eg a place that was matched in both Italian and Spanish should appear as a single match)
+3. remove duplicate geonames for the same place (eg a place that was matched in both Italian and Spanish should appear as a single match)

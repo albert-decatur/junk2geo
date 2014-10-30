@@ -180,14 +180,21 @@ function get_geonames {
 			else
 				allnames=$( echo -e "$names\n$asciinames" )
 			fi
-			# names are often the same - eg "name" and "asciiname"
+			# names are often the same - eg "name" and "asciiname" entries
 			# remove double quotes - these will be used to encase multiterm place names
+			# TODO will have to deal with missing double quotes when matching back to geoname id, unless double quotes are never used
 			allnames=$(
 				echo "$allnames" |\
 				sort |\
 				uniq |\
 				sed "s:\"::g"
 			)
+			# if use length, geonames candidates must be greater than specified length
+			if [[ '$use_length' -eq 1 ]]; then
+				allnames=$( mawk "{ if( length(\$0) > '$length' ) print \$0 }" <( echo "$allnames" ) )
+				# DELETE
+				echo "$allnames" > /tmp/allnames
+			fi	
 			# measure number of terms in the bag of words of the doc to geocode (all records to geocode with that iso2 list) and the geonames for that iso2 list
 			doc_bow=$(
 				echo "$doc" |\
@@ -215,25 +222,27 @@ function get_geonames {
 				doc_bow=$(
 					grep -vFxf '$stopwords' <(echo "$doc_bow" )	
 				)
-			fi	
-			# if use length, doc bag of words terms cannot be less than specified length - but only after removing punctuation and whitespace
+			fi
+			# if use length, doc bag of words terms must be greather than specified length - but only after removing punctuation and whitespace
 			if [[ '$use_length' -eq 1 ]]; then
-				lengthtmp=$(mktemp)
-				echo "$doc_bow" > $lengthtmp
+				docbowtmp=$(mktemp)
+				echo "$doc_bow" > $docbowtmp
 				passes_length=$( 
 					echo "$doc_bow" |\
 					tr -d "[:punct:]" |\
 					sed "s:[ \t]\+::g" |\
 					# note use of FNR to get current 1-indexed record number
-					awk "{ if( length(\$0) > $length ) print FNR}" 
+					mawk "{ if( length(\$0) > '$length' ) print FNR}" 
 				)
 				# build a sed statement to pass to bash that will print those records mentioned by awk FNR - these records met the length requirement
 				doc_bow=$( 
 					echo "$passes_length" |\
-					sed "s:^:sed -n \":g;s:$:p\" $lengthtmp:g" |\
+					sed "s:^:sed -n \":g;s:$:p\" $docbowtmp:g" |\
 					bash
 				)
 			fi	
+			# DELETE
+			echo "$doc_bow" > /tmp/doc_bow
 			count_terms_doc_bow=$(
 				echo "$doc_bow" |\
 				wc -l 
@@ -243,10 +252,11 @@ function get_geonames {
 				wc -l
 			)
 			# if the doc bag of words has *far* fewer terms than geonames then use each term in the bow to make an intermediate list of geonames to search the doc with
+			# ultimately this should be based on the average number of geonames candidates that are selected for each doc term. right now its a guess.
 			# consider using agreps -f patternfile here.  problem: limit of 30k terms.  also terms with match far far too many cannot be ignored
-			weight=500
+			weight=350
 			if [[ $( expr "$count_terms_doc_bow" \* $weight ) -lt "$count_terms_geonames" ]]; then
-				geo_candidates=$(	
+				geo_candidates=$(
 					for doc_term in $doc_bow
 					do
 						geonames_from_doc_bow=$( agrep -'$errors' -i -w -k "$doc_term" <( echo "$allnames" ) )
@@ -262,15 +272,16 @@ function get_geonames {
 				# doc has more terms than geonames for the iso2s selected
 				geo_candidates="$allnames"
 			fi
-			#echo -e {}"\t$doc"
 		else
 			# there are no iso2s - use allCounties table from SQLite in its entirety
+			# TODO: must move end of if statement so that stopwords, length, etc apply when there are no iso2s
 			geo_candidates="$allnames"
 		fi
 		# send doc text to file
 		tmpdoc=$(mktemp)
 		echo "$doc" > $tmpdoc
-		# for each geonames candidate, agrep for whether it is present, then tre-agrep for the text that was matched
+		# for each geonames candidate, [ deprecated: agrep for whether it is present ], then tre-agrep for the text that was matched
+		# could we use a patternfiles here instead of a loop? pattern file length could be limiting but could split
 		while read geo_candidate
 		do
 			## agrep issue: "pattern too long (has > 32 chars)"
