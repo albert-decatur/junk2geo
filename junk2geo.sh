@@ -24,7 +24,7 @@ OPTIONS:
    -i      input TSV to geocode, with two columns: 1) country ISO2(s), 2) text to geocode
    -d      drop the ISO2 subset tables based on GeoNames' allCountries. Warning: these can take several minutes to recreate
    -a      use GeoNames alternate names as well as "name" and "asciiname".  Altnerate names are in as many languages as possible
-   -s      do not allow any terms from this list of stopwords to be considered a match.  One line per stopword
+   -s      do not allow any terms from this list of stopwords to be considered a match.  One line per stopword. Consider this a blacklist.
    -l      match must be at least this length to be considered a candidate.  Very short matches are typically junk, but you may miss out on very short placenames
 
 Multiple values of ISO2 ought to be pipe separated in the first column of the input TSV (using the -i flag) like so: IR|US|CN.
@@ -294,7 +294,7 @@ function get_geonames {
 			#agrep -'$errors' -i -w -k "$geo_candidate" $tmpdoc
 			# get geonames candidates that match according to number of user errors
 			tre-agrep -E '$errors' -w -e "$geo_candidate" --show-position $tmpdoc |\
-			while read matchline                                                                                                   
+			while read matchline
 			do
 				characterRange=$(echo "$matchline" | grep -oE "^*[^:]+" | awk -F"-" "{OFS=\"-\"}{print \$1+1,\$2+1}")
 				match=$(echo "$matchline" | sed "s:^[0-9]\+-[0-9]\+\:::g" | cut -c $characterRange)
@@ -321,9 +321,9 @@ function get_geonames {
 				# if there is a match then print it
 				if [[ -n "$match" ]]; then
 					body=$(echo "$matchline" | sed "s/^[0-9]\+-[0-9]\+://g")
-					# TODO: must find geonameid for match
+					# TODO: must find geonameid for geo_candidate - there could also be multiple
 					#echo "$(echo "$match" | sed "s:|::g")|$body"
-					echo "$match"
+					echo "$match|$geo_candidate"
 				fi
 			done
 		done < <( echo "$geo_candidates" )
