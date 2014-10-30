@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #TODO
+# add stopwords flag
+# add match text length flag
 # add flag for ignoring country names for geocoding (from countryInfo table)
 # add -S options from flag for GNU parallel so can be run on multi host.  will have to transfer SQLite DB, input TSV - have not had success with -trc flag
 # user control over how much smaller a doc bow must be before it's used to search for geonames subset?
@@ -9,7 +11,7 @@
 usage()
 {
 cat << EOF
-usage: $0 [OPTIONS]
+usage: $0 -e n [-d] [-a] [-s stopwords/stopwords_en_es_fr_pt_de_it.txt] [-l n] -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
 
 Use fuzzy text match and GeoNames to geocode input TSV.
 Allows for the number of typos specified by the user and can use or not use GeoNames alternate names (typically these are non-English).
@@ -17,20 +19,22 @@ Output is meant to be handed to match_metrics.sh to pare down according to vario
 
 OPTIONS:
    -h      show this message
-   -e      number of errors to allow in matched text. This is according to agrep and tre-agrep. Note that if text to geocode is smaller than the pool of GeoNames given ISO2 then this error parameter will be used to select a candidate pool of GeoNames given text terms.
+   -e      number of errors to allow in matched text
    -g      input GeoNames SQLite database made by https://github.com/albert-decatur/geonames2sqlite
-   -i      input TSV to geocode, with two columns: 1) country ISO2(s), 2) text to geocode. 
-   -d      drop the ISO2 subset tables based on GeoNames' allCountries. Warning: these can take several minutes to generate.  Also, this is not relevant until the script has been run at least once.
-   -a      use GeoNames alternate names as well as "name" and "asciiname".  Altnerate names are in as many languages as possible.
+   -i      input TSV to geocode, with two columns: 1) country ISO2(s), 2) text to geocode
+   -d      drop the ISO2 subset tables based on GeoNames' allCountries. Warning: these can take several minutes to recreate
+   -a      use GeoNames alternate names as well as "name" and "asciiname".  Altnerate names are in as many languages as possible
+   -s      do not allow any terms from this list of stopwords to be considered a match.  One line per stopword
+   -l      do not allow any match less than this length to be considered a candidate.  Very short matches are typically junk, but you may miss out on very short placenames
 
-Multiple values of ISO2 ought to be pipe separated in the second column of the input TSV (using the -i flag) like so: IR|US|CN.
-If no ISO2 is appropriate simply do not include any.  However, terms for all of GeoNames will be searched so try to include some ISO2s where you can. Whole continent worth of ISO2s is much better than trying to geocode from the whole earth.
+Multiple values of ISO2 ought to be pipe separated in the first column of the input TSV (using the -i flag) like so: IR|US|CN.
+If no ISO2 is appropriate simply do not include any.  However, terms for all of GeoNames will be searched so try to include some ISO2s where you can. A whole continent worth of ISO2s is much better than trying to geocode from the whole earth.
 Example use: $0 -e 1 -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
 
 EOF
 }
 
-while getopts "hdae:g:i:" OPTION
+while getopts "hdae:g:i:s:l:" OPTION
 do
      case $OPTION in
          h)
@@ -52,9 +56,26 @@ do
          a)
              use_alts=1
              ;;
+         s)
+             use_stopwords=1
+             stopwords=$OPTARG
+             ;;
+         l)
+             use_length=1
+             length=$OPTARG
+             ;;
      esac
 done
-	#tre-agrep -E $errors -w -e "$place" --show-position $to_geo |\
+
+# allow GNU parallel to use stopwords user arg
+if [[ $use_stopwords -ne 1 ]]; then
+	use_stopwords=0
+fi
+# allow GNU parallel to use length user arg
+if [[ $use_length -ne 1 ]]; then
+	use_length=0
+fi
+
 
 function mk_iso2_tables { 
 	# make apostraphe a variable for GNU parallel
@@ -185,10 +206,34 @@ function get_geonames {
 				# cant have a number
 				grep -vE "[0-9]" |\
 				# make ascii
-				# this slows things down a ton but agrep complains and maybe fails sometimes without it, even with -k flag
-				# one possibility is to use tre-agrep later without iconv here
+				# this slows things down a ton but agrep fails sometimes without it, even with -k flag
+				# one possibility is to use tre-agrep later to find geonames candidates without using iconv here
 				iconv -c -f utf8 -t ASCII//TRANSLIT
 			)
+			# if use stopwords, doc bag of words cannot have stopwords
+			if [[ '$use_stopwords' -eq 1 ]]; then
+				doc_bow=$(
+					grep -vFxf '$stopwords' <(echo "$doc_bow" )	
+				)
+			fi	
+			# if use length, doc bag of words terms cannot be less than specified length - but only after removing punctuation and whitespace
+			if [[ '$use_length' -eq 1 ]]; then
+				lengthtmp=$(mktemp)
+				echo "$doc_bow" > $lengthtmp
+				passes_length=$( 
+					echo "$doc_bow" |\
+					tr -d "[:punct:]" |\
+					sed "s:[ \t]\+::g" |\
+					# note use of FNR to get current 1-indexed record number
+					awk "{ if( length(\$0) > $length ) print FNR}" 
+				)
+				# build a sed statement to pass to bash that will print those records mentioned by awk FNR - these records met the length requirement
+				doc_bow=$( 
+					echo "$passes_length" |\
+					sed "s:^:sed -n \":g;s:$:p\" $lengthtmp:g" |\
+					bash
+				)
+			fi	
 			count_terms_doc_bow=$(
 				echo "$doc_bow" |\
 				wc -l 
@@ -228,10 +273,26 @@ function get_geonames {
 		# for each geonames candidate, agrep for whether it is present, then tre-agrep for the text that was matched
 		while read geo_candidate
 		do
-			## issue: "pattern too long (has > 32 chars)"
+			## agrep issue: "pattern too long (has > 32 chars)"
 			#agrep -'$errors' -i -w -k "$geo_candidate" $tmpdoc
-			tre-agrep -E '$errors' -w -e "$geo_candidate" --show-position $tmpdoc
-			
+			# get geonames candidates that match according to number of user errors
+			tre-agrep -E '$errors' -w -e "$geo_candidate" --show-position $tmpdoc |\
+			while read matchline                                                                                                   
+			do
+				characterRange=$(echo "$matchline" | grep -oE "^*[^:]+" | awk -F"-" "{OFS=\"-\"}{print \$1+1,\$2+1}")
+				match=$(echo "$matchline" | sed "s:^[0-9]\+-[0-9]\+\:::g" | cut -c $characterRange)
+				# if use stopwords, match cannot be stopword
+				if [[ '$use_stopwords' -eq 1 ]]; then
+					match=$(
+						# remove whitespace, punctuation, and make lowercase when comparing to sotpwords
+						grep -vFxf '$stopwords' <( echo "$match" | tr -d "[:punct:]" | sed "s:[ \t]\+::g" | mawk "{ print tolower(\$0) }" )
+					)
+				fi	
+				if [[ -n $match ]]; then
+					body=$(echo "$matchline" | sed "s/^[0-9]\+-[0-9]\+://g")
+					echo "$(echo "$match" | sed "s:|::g")|$body"
+				fi
+			done
 		done < <( echo "$geo_candidates" )
 	'
 }

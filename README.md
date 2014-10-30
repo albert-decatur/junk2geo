@@ -34,6 +34,8 @@ Prerequisites
 * agrep
 * tre-agrep
 * mawk
+* moreutils
+  * for mktemp
 
 Why agrep **and** tre-agrep?  The first is very fast, and the second can show you the exact pattern that was matched.
 
