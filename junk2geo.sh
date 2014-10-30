@@ -189,13 +189,13 @@ function get_geonames {
 				uniq |\
 				sed "s:\"::g"
 			)
-			# if use length, geonames candidates must be greater than specified length
+			# if use length, allname must be greater than specified length
 			if [[ '$use_length' -eq 1 ]]; then
 				allnames=$( mawk "{ if( length(\$0) > '$length' ) print \$0 }" <( echo "$allnames" ) )
 				# DELETE
 				echo "$allnames" > /tmp/allnames
 			fi	
-			# if use stopwords, allnames cannot have stopwords
+			# if use stopwords, allnames cannot be stopword
 			if [[ '$use_stopwords' -eq 1 ]]; then
 				allnames=$(
 					grep -vFxf '$stopwords' <(echo "$allnames" )	

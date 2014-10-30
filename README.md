@@ -24,6 +24,13 @@ Some features include:
 * choose whether to filter by length
   * this applies to both the output matched text and the input GeoNames text
 
+Note that while junk2geo.sh **and** match_metrics.sh can tell you if a match was a stopword, 
+and the length of the match, junk2geo.sh is **much** slower than match_metrics.sh.
+Because both tools have these two features you can pursue these strategies:
+
+* pass a short stopwords list to junk2geo.sh, and a huge one to match_metrics.sh
+* restrict lengths to be greather than n characters for junk2geo.sh, but plot **all** the resulting lengths with match_metrics.sh
+
 **Warning**
 
 junk2geo is for patient people with very bad input data!
