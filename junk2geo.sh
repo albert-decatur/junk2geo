@@ -25,7 +25,7 @@ OPTIONS:
    -d      drop the ISO2 subset tables based on GeoNames' allCountries. Warning: these can take several minutes to recreate
    -a      use GeoNames alternate names as well as "name" and "asciiname".  Altnerate names are in as many languages as possible
    -s      do not allow any terms from this list of stopwords to be considered a match.  One line per stopword
-   -l      do not allow any match less than this length to be considered a candidate.  Very short matches are typically junk, but you may miss out on very short placenames
+   -l      match must be at least this length to be considered a candidate.  Very short matches are typically junk, but you may miss out on very short placenames
 
 Multiple values of ISO2 ought to be pipe separated in the first column of the input TSV (using the -i flag) like so: IR|US|CN.
 If no ISO2 is appropriate simply do not include any.  However, terms for all of GeoNames will be searched so try to include some ISO2s where you can. A whole continent worth of ISO2s is much better than trying to geocode from the whole earth.
@@ -195,6 +195,12 @@ function get_geonames {
 				# DELETE
 				echo "$allnames" > /tmp/allnames
 			fi	
+			# if use stopwords, allnames cannot have stopwords
+			if [[ '$use_stopwords' -eq 1 ]]; then
+				allnames=$(
+					grep -vFxf '$stopwords' <(echo "$allnames" )	
+				)
+			fi
 			# measure number of terms in the bag of words of the doc to geocode (all records to geocode with that iso2 list) and the geonames for that iso2 list
 			doc_bow=$(
 				echo "$doc" |\
@@ -217,12 +223,6 @@ function get_geonames {
 				# one possibility is to use tre-agrep later to find geonames candidates without using iconv here
 				iconv -c -f utf8 -t ASCII//TRANSLIT
 			)
-			# if use stopwords, doc bag of words cannot have stopwords
-			if [[ '$use_stopwords' -eq 1 ]]; then
-				doc_bow=$(
-					grep -vFxf '$stopwords' <(echo "$doc_bow" )	
-				)
-			fi
 			# if use length, doc bag of words terms must be greather than specified length - but only after removing punctuation and whitespace
 			if [[ '$use_length' -eq 1 ]]; then
 				docbowtmp=$(mktemp)
@@ -241,6 +241,12 @@ function get_geonames {
 					bash
 				)
 			fi	
+			# if use stopwords, doc bag of words cannot have stopwords
+			if [[ '$use_stopwords' -eq 1 ]]; then
+				doc_bow=$(
+					grep -vFxf '$stopwords' <(echo "$doc_bow" )	
+				)
+			fi
 			# DELETE
 			echo "$doc_bow" > /tmp/doc_bow
 			count_terms_doc_bow=$(
@@ -292,6 +298,19 @@ function get_geonames {
 			do
 				characterRange=$(echo "$matchline" | grep -oE "^*[^:]+" | awk -F"-" "{OFS=\"-\"}{print \$1+1,\$2+1}")
 				match=$(echo "$matchline" | sed "s:^[0-9]\+-[0-9]\+\:::g" | cut -c $characterRange)
+				# if use length, match must be greather than specified length - but only after removing punctuation and whitespace
+				if [[ '$use_length' -eq 1 ]]; then
+					passes_length=$( 
+						echo "$match" |\
+						tr -d "[:punct:]" |\
+						sed "s:[ \t]\+::g" |\
+						mawk "{ if( length(\$0) > '$length' ) print 1 }" 
+					)
+					# if it does not pass the length test then there is no match
+					if [[ "$passes_length" -ne 1 ]]; then
+						match=
+					fi
+				fi
 				# if use stopwords, match cannot be stopword
 				if [[ '$use_stopwords' -eq 1 ]]; then
 					match=$(
@@ -299,9 +318,12 @@ function get_geonames {
 						grep -vFxf '$stopwords' <( echo "$match" | tr -d "[:punct:]" | sed "s:[ \t]\+::g" | mawk "{ print tolower(\$0) }" )
 					)
 				fi	
-				if [[ -n $match ]]; then
+				# if there is a match then print it
+				if [[ -n "$match" ]]; then
 					body=$(echo "$matchline" | sed "s/^[0-9]\+-[0-9]\+://g")
-					echo "$(echo "$match" | sed "s:|::g")|$body"
+					# TODO: must find geonameid for match
+					#echo "$(echo "$match" | sed "s:|::g")|$body"
+					echo "$match"
 				fi
 			done
 		done < <( echo "$geo_candidates" )

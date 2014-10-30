@@ -66,6 +66,10 @@ GNU parallel allows junk2geo.sh to be run on an arbitrary number of hosts as lon
 Note that you can greatly speed up performance on repeatative datasets by finding only unique values that should matter to geocoding.
 For example, if you start with a 2.7m record OECD CRS dataset, try taking unique values of just fields that have geocodeable information, and use this input to join back to the original after geocoding.
 
+Cultivating a good stopword list is one of the best ways to improve accuracy.
+The ideal stopword list would contain all the words that appear in your text, regardless of language and spelling, that are not placenames.
+Of course, you don't want to make the stopword list enourmous (eg >1m records).
+
 How it Works
 ============
 
