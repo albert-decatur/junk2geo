@@ -86,6 +86,10 @@ fi
 if [[ $use_length -ne 1 ]]; then
 	use_length=0
 fi
+# allow GNU parallel to use use_alts
+if [[ $use_alts -ne 1 ]]; then
+	use_alts=0
+fi
 
 
 function mk_iso2_tables { 
@@ -362,41 +366,42 @@ function get_geonames {
 					echo -e "$geo_candidate\t$match\t$body"
 				fi
 			done > $matchtmp
-			# must find geonameids for each geo_candidate
-			# pipe separate if multiple
-			# first make a list of unique geo_candidates that had a match
-			uniq_geo_candidates_w_match=$(
-				cat $matchtmp |\
-				mawk -F"\t" "{ print \$1 }" |\
-				sort |\
-				uniq
-			)
-			# make a variable with the iso2s table as TSV that has geonameid and all name variants allowed (use_alts or not according to user args)
-			if [[ '$use_alts' -eq 1 ]]; then
-				table_w_geonameids=$( 
-					echo -e ".mode tabs\nSELECT geonameid,name,asciiname,CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\t'$a') END AS alternatenames FROM \"$table\";" |\
-					sqlite3 '$geonames'
-				)
-			else
-				table_w_geonameids=$( 
-					echo -e ".mode tabs\nSELECT geonameid,name,asciiname FROM \"$table\";" |\
-					sqlite3 '$geonames'
-				)
-			fi
-			# for each geo_candidate that had a match, find corresponding geonameids
-			# then join this back to matchtmp according to geo_candidate names
-			geonameidstmp=$(mktemp)
-			echo "$uniq_geo_candidates_w_match" |\
-			while read geo_candidate do
-				geonameids=$(
-					# not sure why these tabs cant be \t
-					LANG=C grep -E "	$geo_candidate	" <( echo "$table_w_geonameids" ) |\
-					mawk -F"\t" "{print \$1}" |\
-					tr "\n" "|" |\
-					sed "s:|$::g"
-				)
-				echo -e "$geonameids\t$geo_candidate"
-			done > $geonameidstmp
+#			# must find geonameids for each geo_candidate
+#			# pipe separate if multiple
+#			# first make a list of unique geo_candidates that had a match
+#			uniq_geo_candidates_w_match=$(
+#				cat $matchtmp |\
+#				mawk -F"\t" "{ print \$1 }" |\
+#				sort |\
+#				uniq
+#			)
+#			# make a variable with the iso2s table as TSV that has geonameid and all name variants allowed (use_alts or not according to user args)
+#			if [[ '$use_alts' -eq 1 ]]; then
+#				table_w_geonameids=$( 
+#					echo -e ".mode tabs\nSELECT geonameid,name,asciiname,CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\t'$a') END AS alternatenames FROM \"$table\";" |\
+#					sqlite3 '$geonames'
+#				)
+#			else
+#				table_w_geonameids=$( 
+#					echo -e ".mode tabs\nSELECT geonameid,name,asciiname FROM \"$table\";" |\
+#					sqlite3 '$geonames'
+#				)
+#			fi
+#			# for each geo_candidate that had a match, find corresponding geonameids
+#			# then join this back to matchtmp according to geo_candidate names
+#			geonameidstmp=$(mktemp)
+#			echo "$uniq_geo_candidates_w_match" |\
+#			while read needs_geonameids 
+#			do
+#				geonameids=$(
+#					# not sure why these tabs cant be \t
+#					LANG=C grep -E "	$needs_geonameids	" <( echo "$table_w_geonameids" ) |\
+#					mawk -F"\t" "{print \$1}" |\
+#					tr "\n" "|" |\
+#					sed "s:|$::g"
+#				)
+#				echo -e "$geonameids\t$geo_candidate"
+#			done > $geonameidstmp
 		# DELETE
 		echo -e "matchtmp is $matchtmp\ngeonameidstmp is $geonameidstmp"
 		done < <( echo "$geo_candidates" )
