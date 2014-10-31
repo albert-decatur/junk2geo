@@ -8,6 +8,7 @@
 # user control over max geonames returns per ASCII doc term?
 # is passing doc terms to ASCII//TRANSLIT for the benefit of agrep while selecting geo_candidates causing a problem with alternate place names not being selected?
 # how to handle backticks (`) and other shell interpretted or regex characters in placenames?
+# clean up tmp files
 
 usage()
 {
@@ -311,18 +312,26 @@ function get_geonames {
 		# send doc text to file
 		tmpdoc=$(mktemp)
 		echo "$doc" > $tmpdoc
-		# for each geonames candidate, [ deprecated: agrep for whether it is present ], then tre-agrep for the text that was matched
+		# for each geonames candidate, tre-agrep for the text that was matched
 		# could we use a patternfiles here instead of a loop? pattern file length could be limiting but could split
 		while read geo_candidate
 		do
-			## agrep issue: "pattern too long (has > 32 chars)"
-			#agrep -'$errors' -i -w -k "$geo_candidate" $tmpdoc
 			# get geonames candidates that match according to number of user errors
+			matchtmp=$(mktemp)
+			# this is where the fuzzy text match happens to find place names
 			tre-agrep -E '$errors' -w -e "$geo_candidate" --show-position $tmpdoc |\
 			while read matchline
 			do
-				characterRange=$(echo "$matchline" | grep -oE "^*[^:]+" | awk -F"-" "{OFS=\"-\"}{print \$1+1,\$2+1}")
-				match=$(echo "$matchline" | sed "s:^[0-9]\+-[0-9]\+\:::g" | cut -c $characterRange)
+				characterRange=$(
+					echo "$matchline" |\
+					grep -oE "^*[^:]+" |\
+					awk -F"-" "{OFS=\"-\"}{print \$1+1,\$2+1}"
+				)
+				match=$(
+					echo "$matchline" |\
+					sed "s:^[0-9]\+-[0-9]\+\:::g" |\
+					cut -c $characterRange
+				)
 				# if use length, match must be greather than specified length - but only after removing punctuation and whitespace
 				if [[ '$use_length' -eq 1 ]]; then
 					passes_length=$( 
@@ -343,16 +352,53 @@ function get_geonames {
 						grep -vFxf '$stopwords' <( echo "$match" | tr -d "[:punct:]" | sed "s:[ \t]\+::g" | mawk "{ print tolower(\$0) }" )
 					)
 				fi	
-				# if there is a match then print it
+				# if there is a match then print it, the geo_candidate it matched, and the body text record the match text came from
 				if [[ -n "$match" ]]; then
-					body=$(echo "$matchline" | sed "s/^[0-9]\+-[0-9]\+://g")
-					# must find geonameid for geo_candidate - there could also be multiple
-					#echo -e "SELECT * FROM \"$table\" WHERE ;" |\
-					#sqlite3 '$geonames' |\
-					#grep -vE "^$" 
-					##echo -e "$match\t$geo_candidate\t$body"
+					body=$(
+						echo "$matchline" |\
+						# remove tre-agrep match character range
+						sed "s/^[0-9]\+-[0-9]\+://g"
+					)
+					echo -e "$geo_candidate\t$match\t$body"
 				fi
-			done
+			done > $matchtmp
+			# must find geonameids for each geo_candidate
+			# pipe separate if multiple
+			# first make a list of unique geo_candidates that had a match
+			uniq_geo_candidates_w_match=$(
+				cat $matchtmp |\
+				mawk -F"\t" "{ print \$1 }" |\
+				sort |\
+				uniq
+			)
+			# make a variable with the iso2s table as TSV that has geonameid and all name variants allowed (use_alts or not according to user args)
+			if [[ '$use_alts' -eq 1 ]]; then
+				table_w_geonameids=$( 
+					echo -e ".mode tabs\nSELECT geonameid,name,asciiname,CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\t'$a') END AS alternatenames FROM \"$table\";" |\
+					sqlite3 '$geonames'
+				)
+			else
+				table_w_geonameids=$( 
+					echo -e ".mode tabs\nSELECT geonameid,name,asciiname FROM \"$table\";" |\
+					sqlite3 '$geonames'
+				)
+			fi
+			# for each geo_candidate that had a match, find corresponding geonameids
+			# then join this back to matchtmp according to geo_candidate names
+			geonameidstmp=$(mktemp)
+			echo "$uniq_geo_candidates_w_match" |\
+			while read geo_candidate do
+				geonameids=$(
+					# not sure why these tabs cant be \t
+					LANG=C grep -E "	$geo_candidate	" <( echo "$table_w_geonameids" ) |\
+					mawk -F"\t" "{print \$1}" |\
+					tr "\n" "|" |\
+					sed "s:|$::g"
+				)
+				echo -e "$geonameids\t$geo_candidate"
+			done > $geonameidstmp
+		# DELETE
+		echo -e "matchtmp is $matchtmp\ngeonameidstmp is $geonameidstmp"
 		done < <( echo "$geo_candidates" )
 	'
 }

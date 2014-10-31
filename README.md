@@ -49,6 +49,8 @@ Prerequisites
 * agrep
 * tre-agrep
 * mawk
+* csvkit
+  * for csvjoin
 * moreutils
   * for mktemp
 
