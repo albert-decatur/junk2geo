@@ -1,17 +1,18 @@
 #!/bin/bash
 
 #TODO
-# add stopwords flag
-# add match text length flag
 # add flag for ignoring country names for geocoding (from countryInfo table)
-# add -S options from flag for GNU parallel so can be run on multi host.  will have to transfer SQLite DB, input TSV - have not had success with -trc flag
+# add flag for GNU parallel so can be run on multi host.  will have to transfer SQLite DB, input TSV - have not had success with -trc flag
+# note when the same text is used to match to more than one placename
 # user control over how much smaller a doc bow must be before it's used to search for geonames subset?
 # user control over max geonames returns per ASCII doc term?
+# is passing doc terms to ASCII//TRANSLIT for the benefit of agrep while selecting geo_candidates causing a problem with alternate place names not being selected?
+# how to handle backticks (`) and other shell interpretted or regex characters in placenames?
 
 usage()
 {
 cat << EOF
-usage: $0 -e n [-d] [-a] [-s stopwords/stopwords_en_es_fr_pt_de_it.txt] [-l n] -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
+usage: $0 -e n [-d] [-a] [-s|-S stopwords/stopwords_en_es_fr_pt_de_it.txt] [-l n] -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
 
 Use fuzzy text match and GeoNames to geocode input TSV.
 Allows for the number of typos specified by the user and can use or not use GeoNames alternate names (typically these are non-English).
@@ -25,16 +26,18 @@ OPTIONS:
    -d      drop the ISO2 subset tables based on GeoNames' allCountries. Warning: these can take several minutes to recreate
    -a      use GeoNames alternate names as well as "name" and "asciiname".  Altnerate names are in as many languages as possible
    -s      do not allow any terms from this list of stopwords to be considered a match.  One line per stopword. Consider this a blacklist.
+   -S      same as -s but intended for a very large list of stopwords.  This flag will make a temporary stopword list composed only of terms that appear at least once in the input TSV. If a /tmp/stopwords exists it will be used. Cannot be used with -s.
    -l      match must be at least this length to be considered a candidate.  Very short matches are typically junk, but you may miss out on very short placenames
 
 Multiple values of ISO2 ought to be pipe separated in the first column of the input TSV (using the -i flag) like so: IR|US|CN.
 If no ISO2 is appropriate simply do not include any.  However, terms for all of GeoNames will be searched so try to include some ISO2s where you can. A whole continent worth of ISO2s is much better than trying to geocode from the whole earth.
+The '-S' flag will make a temporary stopword list at /tmp/stopwords.  This is in case you want to preserve this list.
 Example use: $0 -e 1 -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
 
 EOF
 }
 
-while getopts "hdae:g:i:s:l:" OPTION
+while getopts "hdae:g:i:s:S:l:" OPTION
 do
      case $OPTION in
          h)
@@ -60,6 +63,10 @@ do
              use_stopwords=1
              stopwords=$OPTARG
              ;;
+         S)
+             use_big_stopwords=1
+             big_stopwords=$OPTARG
+             ;;
          l)
              use_length=1
              length=$OPTARG
@@ -70,6 +77,9 @@ done
 # allow GNU parallel to use stopwords user arg
 if [[ $use_stopwords -ne 1 ]]; then
 	use_stopwords=0
+elif [[ $use_stopwords -eq 1 ]] && [[ $use_big_stopwords -eq 1 ]]; then
+	echo -e "\nYou cannot use both the regular stopwords flag '-s' *and* the big stopwords flag '-S' at the same time.\nPlease choose one!\n"
+	exit 1
 fi
 # allow GNU parallel to use length user arg
 if [[ $use_length -ne 1 ]]; then
@@ -78,8 +88,6 @@ fi
 
 
 function mk_iso2_tables { 
-	# make apostraphe a variable for GNU parallel
-	a="'"
 	# print the ISO2 field from the input and get unique lists of ISO2s
 	cat $to_geo |\
 	mawk -F'\t' '{print $1}'|\
@@ -136,7 +144,24 @@ EOF
 	#sqlite3 $geonames
 }
 
+function big_stopwords {
+	# if /tmp/stopwords exists it will be used.  remove this file if it is irrelevant!
+	stopwords=/tmp/stopwords
+	if [[ -f $stopwords ]]; then
+		# use existing /tmp/stopwords
+		false
+	else
+		# match input TSV text word by word to big stopwords list
+		LANG=C grep -owiFf $big_stopwords <( cat $to_geo | mawk -F"\t" "{print \$2}" ) |\
+		mawk "{print tolower(\$0)}" |\
+		sort |\
+		uniq > /tmp/stopwords
+	fi
+}
+
 function get_geonames { 
+	# apostraphe variable for GNU parallel
+	a="'"
 	# for each unique iso2 combination, get the text to geocode and the table with geonames
 	# make apostraphe variable for GNU parallel
 	a="'"
@@ -321,19 +346,24 @@ function get_geonames {
 				# if there is a match then print it
 				if [[ -n "$match" ]]; then
 					body=$(echo "$matchline" | sed "s/^[0-9]\+-[0-9]\+://g")
-					# TODO: must find geonameid for geo_candidate - there could also be multiple
-					#echo "$(echo "$match" | sed "s:|::g")|$body"
-					echo "$match|$geo_candidate"
+					# must find geonameid for geo_candidate - there could also be multiple
+					#echo -e "SELECT * FROM \"$table\" WHERE ;" |\
+					#sqlite3 '$geonames' |\
+					#grep -vE "^$" 
+					##echo -e "$match\t$geo_candidate\t$body"
 				fi
 			done
 		done < <( echo "$geo_candidates" )
 	'
 }
 
+# invoke functions
+if [[ $use_big_stopwords -eq 1 ]]; then
+	big_stopwords
+fi
 if [[ $drop_iso2_tables -eq 1 ]]; then
 	rm_iso2_tables
-	get_geonames
 else
 	mk_iso2_tables
-	get_geonames
 fi
+get_geonames
