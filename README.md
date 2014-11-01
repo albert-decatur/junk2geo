@@ -99,3 +99,14 @@ match_metrics.sh
 1. use the output from junk2geo.sh to make a series of new fields with string metrics comparing the matched text and the geonames candidates
 2. filter out geonames candidates according to poor performance in metrics of your choice (eg, sound does not match according to Double Metaphone)
 3. remove duplicate geonames for the same place (eg a place that was matched in both Italian and Spanish should appear as a single match)
+
+Notes
+=====
+
+The stopword list called 'google_ngrams.tsv'
+is from Google N-grams English One Million.
+The list is a sbuset according to these rules:
+
+* only 1-grams were considered
+* must be greater than 3 characters
+* must have more than 10,000 matches since 1991
