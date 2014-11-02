@@ -3,6 +3,7 @@
 #TODO
 # add flag for ignoring country names for geocoding (from countryInfo table)
 # add flag for GNU parallel so can be run on multi host.  will have to transfer SQLite DB, input TSV - have not had success with -trc flag
+# add flag to use just asciiname field from geonames and trigger use of agrep patternfile for these.  split pattern file as necessary and do not use iconv when prepping doc bow
 # note when the same text is used to match to more than one placename
 # user control over how much smaller a doc bow must be before it's used to search for geonames subset?
 # user control over max geonames returns per ASCII doc term?
@@ -10,6 +11,8 @@
 # how to handle backticks (`) and other shell interpretted or regex characters in placenames?
 # clean up tmp files
 # agrep patternfiles (with -f) are very very fast - consider using
+# test that all flag combinations work
+# geocoding global extremely slow right now
 
 usage()
 {
@@ -147,13 +150,13 @@ EOF
 		echo "DROP TABLE \"$table\";"|\
 		sqlite3 $geonames
 	done	
-	## vacuum to take up less space - this could take a while!
+	## vacuum to take up less space - this takes a super long time
 	#echo "vacuum;" |\
 	#sqlite3 $geonames
 }
 
 function big_stopwords {
-	# if /tmp/stopwords exists it will be used.  remove this file if it is irrelevant!
+	# if /tmp/stopwords exists it will be used.  user ought to remove this file if it is irrelevant!
 	stopwords=/tmp/stopwords
 	if [[ -f $stopwords ]]; then
 		# use existing /tmp/stopwords
@@ -168,6 +171,8 @@ function big_stopwords {
 }
 
 function get_geonames { 
+	# apostraphe for GNU parallel
+	a="'"
 	# for each unique iso2 combination, get the text to geocode and the table with geonames
 	cat $to_geo |\
 	mawk -F'\t' '{ print $1 }'|\
@@ -178,138 +183,139 @@ function get_geonames {
 		iso2s=$( echo {} )
 		if [[ -n $iso2s ]]; then
 			table={}
-			# get all text from input TSV that relates to this list of ISO2s
-			doc=$( 
-				# not sure why this tab cant be \t
-				grep -E "^$table	" '$to_geo' |\
-				mawk -F"\t" "{print \$2}" 
-			)
-			# get geonames names field
-			names=$( 
-				echo -e "select name from \"$table\";" |\
-				sqlite3 '$geonames' |\
-				grep -vE "^$" 
-			)
-			# get geonames asciinames field
-			asciinames=$( 
-				echo -e "SELECT asciiname FROM \"$table\";" |\
-				sqlite3 '$geonames' |\
-				grep -vE "^$" 
-			)
-			# use altnames or dont according to user -a flag
-			# note that we define local var using var from outside GNU parallel
-			use_alts='$use_alts'
-			if [[ -n $use_alts ]]; then
-				altnames=$( 
-					echo -e "SELECT CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\n'$a') END AS alternatenames FROM \"$table\";"  |\
-					sqlite3 '$geonames' |\
-					grep -vE "^$" 
-				)
-				allnames=$( echo -e "$names\n$asciinames\n$altnames" )
-			else
-				allnames=$( echo -e "$names\n$asciinames" )
-			fi
-			# names are often the same - eg "name" and "asciiname" entries
-			# remove double quotes - these will be used to encase multiterm place names
-			# TODO will have to deal with missing double quotes when matching back to geoname id, unless double quotes are never used
-			allnames=$(
-				echo "$allnames" |\
-				sort |\
-				uniq |\
-				sed "s:\"::g"
-			)
-			# if use length, allname must be greater than specified length
-			if [[ '$use_length' -eq 1 ]]; then
-				allnames=$( mawk "{ if( length(\$0) > '$length' ) print \$0 }" <( echo "$allnames" ) )
-				# DELETE
-				echo "$allnames" > /tmp/allnames
-			fi	
-			# if use stopwords, allnames cannot be stopword
-			if [[ '$use_stopwords' -eq 1 ]]; then
-				allnames=$(
-					grep -vFxf '$stopwords' <(echo "$allnames" )	
-				)
-			fi
-			# measure number of terms in the bag of words of the doc to geocode (all records to geocode with that iso2 list) and the geonames for that iso2 list
-			doc_bow=$(
-				echo "$doc" |\
-				# normalize whitespace	
-				sed "s:[ \t]\+: :g" |\
-				# spaces to newline
-				tr " " "\n"|\
-				# punctiation to newline
-				tr "[:punct:]" "\n" |\
-				# all characters to lowercase
-				mawk "{ print tolower(\$0) }" |\
-				sort |\
-				uniq |\
-				grep -vE "^$" |\
-				mawk "{ if( length(\$0) > 3 ) print \$0 }" |\
-				# cant have a number
-				grep -vE "[0-9]" |\
-				# make ascii
-				# this slows things down a ton but agrep fails sometimes without it, even with -k flag
-				# one possibility is to use tre-agrep later to find geonames candidates without using iconv here
-				iconv -c -f utf8 -t ASCII//TRANSLIT
-			)
-			# if use length, doc bag of words terms must be greather than specified length - but only after removing punctuation and whitespace
-			if [[ '$use_length' -eq 1 ]]; then
-				docbowtmp=$(mktemp)
-				echo "$doc_bow" > $docbowtmp
-				passes_length=$( 
-					echo "$doc_bow" |\
-					tr -d "[:punct:]" |\
-					sed "s:[ \t]\+::g" |\
-					# note use of FNR to get current 1-indexed record number
-					mawk "{ if( length(\$0) > '$length' ) print FNR}" 
-				)
-				# build a sed statement to pass to bash that will print those records mentioned by awk FNR - these records met the length requirement
-				doc_bow=$( 
-					echo "$passes_length" |\
-					sed "s:^:sed -n \":g;s:$:p\" $docbowtmp:g" |\
-					bash
-				)
-			fi	
-			# if use stopwords, doc bag of words cannot have stopwords
-			if [[ '$use_stopwords' -eq 1 ]]; then
-				doc_bow=$(
-					grep -vFxf '$stopwords' <(echo "$doc_bow" )	
-				)
-			fi
-			# DELETE
-			echo "$doc_bow" > /tmp/doc_bow
-			count_terms_doc_bow=$(
-				echo "$doc_bow" |\
-				wc -l 
-			)
-			count_terms_geonames=$(
-				echo "$allnames" |\
-				wc -l
-			)
-			# if the doc bag of words has *far* fewer terms than geonames then use each term in the bow to make an intermediate list of geonames to search the doc with
-			# ultimately this should be based on the average number of geonames candidates that are selected for each doc term. right now its a guess.
-			# consider using agreps -f patternfile here.  problem: limit of 30k terms.  also terms with match far far too many cannot be ignored
-			weight=350
-			if [[ $( expr "$count_terms_doc_bow" \* $weight ) -lt "$count_terms_geonames" ]]; then
-				geo_candidates=$(
-					for doc_term in $doc_bow
-					do
-						geonames_from_doc_bow=$( agrep -'$errors' -i -w -k "$doc_term" <( echo "$allnames" ) )
-						c=$( echo "$geonames_from_doc_bow" | wc -l )
-						# if the term matches far too many possible geonames then simply ignore it
-						# should maybe make the max/min here user args
-						if [[ $c -lt 1000 ]] && [[ $c -gt 0 ]]; then
-							echo "$geonames_from_doc_bow" | grep -vE "^$"
-						fi
-					done
-				)
-			else
-				# doc has more terms than geonames for the iso2s selected
-				geo_candidates="$allnames"
-			fi
 		else
-			# there are no iso2s - use allCounties table from SQLite in its entirety
-			# TODO: must move end of if statement so that stopwords, length, etc apply when there are no iso2s
+			## there are no iso2s listed - use allCounties table from SQLite in its entirety
+			#table=allCountries
+			# DELETE - for now do not try to geocode globally
+			break
+		fi
+		# get all text from input TSV that relates to this list of ISO2s
+		doc=$( 
+			# not sure why this tab cant be \t
+			grep -E "^$table	" '$to_geo' |\
+			mawk -F"\t" "{print \$2}" 
+		)
+		# get geonames names field
+		names=$( 
+			echo -e "select name from \"$table\";" |\
+			sqlite3 '$geonames' |\
+			grep -vE "^$" 
+		)
+		# get geonames asciinames field
+		asciinames=$( 
+			echo -e "SELECT asciiname FROM \"$table\";" |\
+			sqlite3 '$geonames' |\
+			grep -vE "^$" 
+		)
+		# use altnames or dont according to user -a flag
+		# note that we define local var using var from outside GNU parallel
+		use_alts='$use_alts'
+		if [[ -n $use_alts ]]; then
+			altnames=$( 
+				echo -e "SELECT CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\n'$a') END AS alternatenames FROM \"$table\";"  |\
+				sqlite3 '$geonames' |\
+				grep -vE "^$" 
+			)
+			allnames=$( echo -e "$names\n$asciinames\n$altnames" )
+		else
+			allnames=$( echo -e "$names\n$asciinames" )
+		fi
+		# names are often the same - eg "name" and "asciiname" entries
+		# remove double quotes - these will be used to encase multiterm place names
+		# TODO will have to deal with missing double quotes when matching back to geoname id, unless double quotes are never used
+		allnames=$(
+			echo "$allnames" |\
+			sort |\
+			uniq |\
+			sed "s:\"::g"
+		)
+		# if use length, allname must be greater than specified length
+		if [[ '$use_length' -eq 1 ]]; then
+			allnames=$( mawk "{ if( length(\$0) > '$length' ) print \$0 }" <( echo "$allnames" ) )
+			# DELETE
+			echo "$allnames" > /tmp/allnames
+		fi	
+		# if use stopwords, allnames cannot be stopword
+		if [[ '$use_stopwords' -eq 1 ]]; then
+			allnames=$(
+				grep -vFxf '$stopwords' <(echo "$allnames" )	
+			)
+		fi
+		# measure number of terms in the bag of words of the doc to geocode (all records to geocode with that iso2 list) and the geonames for that iso2 list
+		doc_bow=$(
+			echo "$doc" |\
+			# normalize whitespace	
+			sed "s:[ \t]\+: :g" |\
+			# spaces to newline
+			tr " " "\n"|\
+			# punctiation to newline
+			tr "[:punct:]" "\n" |\
+			# all characters to lowercase
+			mawk "{ print tolower(\$0) }" |\
+			sort |\
+			uniq |\
+			grep -vE "^$" |\
+			mawk "{ if( length(\$0) > 3 ) print \$0 }" |\
+			# cant have a number
+			grep -vE "[0-9]" |\
+			# make ascii
+			# this slows things down a ton but agrep fails sometimes without it, even with -k flag
+			# one possibility is to use tre-agrep later to find geonames candidates without using iconv here
+			iconv -c -f utf8 -t ASCII//TRANSLIT
+		)
+		# if use length, doc bag of words terms must be greather than specified length - but only after removing punctuation and whitespace
+		if [[ '$use_length' -eq 1 ]]; then
+			docbowtmp=$(mktemp)
+			echo "$doc_bow" > $docbowtmp
+			passes_length=$( 
+				echo "$doc_bow" |\
+				tr -d "[:punct:]" |\
+				sed "s:[ \t]\+::g" |\
+				# note use of FNR to get current 1-indexed record number
+				mawk "{ if( length(\$0) > '$length' ) print FNR}" 
+			)
+			# build a sed statement to pass to bash that will print those records mentioned by awk FNR - these records met the length requirement
+			doc_bow=$( 
+				echo "$passes_length" |\
+				sed "s:^:sed -n \":g;s:$:p\" $docbowtmp:g" |\
+				bash
+			)
+		fi	
+		# if use stopwords, doc bag of words cannot have stopwords
+		if [[ '$use_stopwords' -eq 1 ]]; then
+			doc_bow=$(
+				grep -vFxf '$stopwords' <(echo "$doc_bow" )	
+			)
+		fi
+		# DELETE
+		echo "$doc_bow" > /tmp/doc_bow
+		count_terms_doc_bow=$(
+			echo "$doc_bow" |\
+			wc -l 
+		)
+		count_terms_geonames=$(
+			echo "$allnames" |\
+			wc -l
+		)
+		# if the doc bag of words has *far* fewer terms than geonames then use each term in the bow to make an intermediate list of geonames to search the doc with
+		# ultimately this should be based on the average number of geonames candidates that are selected for each doc term. right now its a guess.
+		# consider using agreps -f patternfile here.  problem: limit of 30k terms.  also terms with match far far too many cannot be ignored
+		weight=350
+		if [[ $( expr "$count_terms_doc_bow" \* $weight ) -lt "$count_terms_geonames" ]]; then
+			geo_candidates=$(
+				for doc_term in $doc_bow
+				do
+					geonames_from_doc_bow=$( agrep -'$errors' -i -w -k "$doc_term" <( echo "$allnames" ) )
+					c=$( echo "$geonames_from_doc_bow" | wc -l )
+					# if the term matches far too many possible geonames then simply ignore it
+					# should maybe make the max/min here user args
+					if [[ $c -lt 1000 ]] && [[ $c -gt 0 ]]; then
+						echo "$geonames_from_doc_bow" | grep -vE "^$"
+					fi
+				done
+			)
+		else
+			# doc has more terms than geonames for the iso2s selected
 			geo_candidates="$allnames"
 		fi
 		# send doc text to file
@@ -365,42 +371,42 @@ function get_geonames {
 					echo -e "$geo_candidate\t$match\t$body"
 				fi
 			done > $matchtmp
-#			# must find geonameids for each geo_candidate
-#			# pipe separate if multiple
-#			# first make a list of unique geo_candidates that had a match
-#			uniq_geo_candidates_w_match=$(
-#				cat $matchtmp |\
-#				mawk -F"\t" "{ print \$1 }" |\
-#				sort |\
-#				uniq
-#			)
-#			# make a variable with the iso2s table as TSV that has geonameid and all name variants allowed (use_alts or not according to user args)
-#			if [[ '$use_alts' -eq 1 ]]; then
-#				table_w_geonameids=$( 
-#					echo -e ".mode tabs\nSELECT geonameid,name,asciiname,CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\t'$a') END AS alternatenames FROM \"$table\";" |\
-#					sqlite3 '$geonames'
-#				)
-#			else
-#				table_w_geonameids=$( 
-#					echo -e ".mode tabs\nSELECT geonameid,name,asciiname FROM \"$table\";" |\
-#					sqlite3 '$geonames'
-#				)
-#			fi
-#			# for each geo_candidate that had a match, find corresponding geonameids
-#			# then join this back to matchtmp according to geo_candidate names
-#			geonameidstmp=$(mktemp)
-#			echo "$uniq_geo_candidates_w_match" |\
-#			while read needs_geonameids 
-#			do
-#				geonameids=$(
-#					# not sure why these tabs cant be \t
-#					LANG=C grep -E "	$needs_geonameids	" <( echo "$table_w_geonameids" ) |\
-#					mawk -F"\t" "{print \$1}" |\
-#					tr "\n" "|" |\
-#					sed "s:|$::g"
-#				)
-#				echo -e "$geonameids\t$geo_candidate"
-#			done > $geonameidstmp
+			# must find geonameids for each geo_candidate
+			# pipe separate if multiple
+			# first make a list of unique geo_candidates that had a match
+			uniq_geo_candidates_w_match=$(
+				cat $matchtmp |\
+				mawk -F"\t" "{ print \$1 }" |\
+				sort |\
+				uniq
+			)
+			# make a variable with the iso2s table as TSV that has geonameid and all name variants allowed (use_alts or not according to user args)
+			if [[ '$use_alts' -eq 1 ]]; then
+				table_w_geonameids=$( 
+					echo -e ".mode tabs\nSELECT geonameid,name,asciiname,CASE WHEN alternatenames IS NOT NULL THEN REPLACE(alternatenames,'$a','$a','$a'\t'$a') END AS alternatenames FROM \"$table\";" |\
+					sqlite3 '$geonames'
+				)
+			else
+				table_w_geonameids=$( 
+					echo -e ".mode tabs\nSELECT geonameid,name,asciiname FROM \"$table\";" |\
+					sqlite3 '$geonames'
+				)
+			fi
+			# for each geo_candidate that had a match, find corresponding geonameids
+			# then join this back to matchtmp according to geo_candidate names
+			geonameidstmp=$(mktemp)
+			echo "$uniq_geo_candidates_w_match" |\
+			while read needs_geonameids 
+			do
+				geonameids=$(
+					# not sure why these tabs cant be \t
+					LANG=C grep -E "	$needs_geonameids	" <( echo "$table_w_geonameids" ) |\
+					mawk -F"\t" "{print \$1}" |\
+					tr "\n" "|" |\
+					sed "s:|$::g"
+				)
+				echo -e "$geonameids\t$geo_candidate"
+			done > $geonameidstmp
 		# DELETE
 		echo -e "matchtmp is $matchtmp\ngeonameidstmp is $geonameidstmp"
 		done < <( echo "$geo_candidates" )
