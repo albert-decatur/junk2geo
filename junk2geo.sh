@@ -9,6 +9,7 @@
 # is passing doc terms to ASCII//TRANSLIT for the benefit of agrep while selecting geo_candidates causing a problem with alternate place names not being selected?
 # how to handle backticks (`) and other shell interpretted or regex characters in placenames?
 # clean up tmp files
+# agrep patternfiles (with -f) are very very fast - consider using
 
 usage()
 {
@@ -165,11 +166,7 @@ function big_stopwords {
 }
 
 function get_geonames { 
-	# apostraphe variable for GNU parallel
-	a="'"
 	# for each unique iso2 combination, get the text to geocode and the table with geonames
-	# make apostraphe variable for GNU parallel
-	a="'"
 	cat $to_geo |\
 	mawk -F'\t' '{ print $1 }'|\
 	sed '1d'|\
