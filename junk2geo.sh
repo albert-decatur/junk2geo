@@ -94,6 +94,8 @@ fi
 
 
 function mk_iso2_tables { 
+	# GNU parallel needs apostraphe
+	a="'"
 	# print the ISO2 field from the input and get unique lists of ISO2s
 	cat $to_geo |\
 	mawk -F'\t' '{print $1}'|\
