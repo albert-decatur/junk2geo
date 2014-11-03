@@ -1,798 +1,394 @@
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" Array><![endif]-->
-<!--[if IE 9]><html class="no-js lt-ie10" Array><![endif]-->
-<!--[if gt IE 9]><!--><html class="no-js" Array prefix="fb: http://ogp.me/ns/fb# og: http://ogp.me/ns# article: http://ogp.me/ns/article# book: http://ogp.me/ns/book# profile: http://ogp.me/ns/profile# video: http://ogp.me/ns/video#"><!--<![endif]-->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta charset="utf-8" />
-<link rel="shortcut icon" href="http://adbdev.org/sites/all/themes/adb/favicon.ico" type="image/vnd.microsoft.icon" />
-<meta name="description" content="This contains detailed information of an ADB project." />
-<meta name="abstract" content="This contains detailed information of an ADB project." />
-<meta name="keywords" content="adb, asian development bank, asdb, 亚洲开发银行, アジア開発銀行, Азиатский банк развития, asia, pacific, poverty asia, adb projects, loans, grants, ta, technical assistance pic, adb finance, adb operations, project data sheets, pds, adb funding" />
-<meta name="news_keywords" content="adb, asian development bank, asdb, 亚洲开发银行, アジア開発銀行, Азиатский банк развития, asia, pacific, poverty asia, adb projects, loans, grants, ta, technical assistance pic, adb finance, adb operations, project data sheets, pds, adb funding" />
-<meta name="generator" content="Drupal 7 (http://drupal.org)" />
-<link rel="canonical" href="http://adb.org/projects/details?page=overview&proj_id=36188-023" />
-<link rel="shortlink" href="http://www.adb.org/node/34245" />
-<link rel="publisher" href="http://www.adb.org" />
-<link rel="author" href="http://adb.org/projects/details?page=overview&proj_id=36188-023" />
-<meta name="original-source" content="http://adb.org/projects/details?page=overview&proj_id=36188-023" />
-<meta property="og:site_name" content="Asian Development Bank" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://adb.org/projects/details?page=overview&proj_id=36188-023" />
-<meta property="og:title" content="Project Details" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:creator" content="@ADB_HQ" />
-<meta name="twitter:url" content="http://adb.org/projects/details?page=overview&proj_id=36188-023" />
-<meta name="twitter:title" content="Project Details" />
-<meta name="twitter:description" content="This contains detailed information of an ADB project." />
-<meta name="dcterms.title" content="Project Details" />
-<meta name="dcterms.creator" content="Anonymous" />
-<meta name="dcterms.subject" content="ADB Funds and Products" />
-<meta name="dcterms.description" content="This contains detailed information of an ADB project." />
-<meta name="dcterms.publisher" content="Asian Development Bank" />
-<meta name="dcterms.date" content="2014-04-15T17:34+08:00" />
-<meta name="dcterms.type" content="Text" />
-<meta name="dcterms.format" content="text/html" />
-<meta name="dcterms.identifier" content="http://adb.org/projects/details?page=overview&proj_id=36188-023" />
-<meta name="dcterms.language" content="en" />
-<title>Project Details | Asian Development Bank</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="cleartype" content="on">
-<!-- Corporate font -->
-<link rel="stylesheet" type="text/css" href="//cloud.typography.com/7936492/627284/css/fonts.css"> 
-<!-- Favicon -->
-<link rel="shortcut icon" href="http://adbdev.org/sites/all/themes/adb/favicon.ico">
-<link rel="apple-touch-icon-precomposed" href="http://adbdev.org/sites/all/themes/adb/apple-touch-icon.png"> 
-<style type="text/css" media="all">
-@import url("http://adbdev.org/sites/all/modules/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css?nd45v2");
-@import url("http://adbdev.org/sites/all/modules/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css?nd45v2");
-@import url("http://adbdev.org/sites/all/modules/jquery_update/replace/ui/themes/base/minified/jquery.ui.accordion.min.css?nd45v2");
-@import url("http://adbdev.org/sites/all/modules/jquery_update/replace/ui/themes/base/minified/jquery.ui.tabs.min.css?nd45v2");</style>
-<style type="text/css" media="all">@import url("http://adbdev.org/modules/contextual/contextual.css?nd45v2");</style>
-<style type="text/css" media="all">
-@import url("http://adbdev.org/sites/all/modules/access_unpublished/css/access_unpublished.css?nd45v2");
-@import url("http://adbdev.org/sites/all/modules/views/css/views.css?nd45v2");</style>
-<style type="text/css" media="all">
-@import url("http://adbdev.org/sites/all/modules/ctools/css/ctools.css?nd45v2");
-@import url("http://adbdev.org/sites/all/modules/easychart/plugins/css/plugin.css?nd45v2");
-@import url("http://adbdev.org/modules/shortcut/shortcut.css?nd45v2");
-@import url("http://adbdev.org/modules/toolbar/toolbar.css?nd45v2");</style>
-<style type="text/css" media="all">@import url("http://adbdev.org/sites/all/themes/adb/css/adb.css?nd45v2");
-@import url("http://adbdev.org/sites/all/themes/adb/css/custom.css?nd45v2");</style>
-<style type="text/css" media="all">
-@font-face {
-	font-family: 'FontAwesome';
-	src: url(/sites/all/themes/adb2k11/fonts/fontawesome/fontawesome-webfont.eot?v=4.0.3);
-	src: url(/sites/all/themes/adb2k11/fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=4.0.3) format("embedded-opentype"), url(/sites/all/themes/adb2k11/fonts/fontawesome/fontawesome-webfont.woff?v=4.0.3) format("woff"), url(/sites/all/themes/adb2k11/fonts/fontawesome/fontawesome-webfont.ttf?v=4.0.3) format("truetype"), url(/sites/all/themes/adb2k11/fonts/fontawesome/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular) format("svg");
-	font-weight: normal;
-	font-style: normal;
-}
-</style>
-<script src="http://adbdev.org/sites/all/themes/adb/js/vendor/modernizr-respond.min.js"></script>
-</head>
-<body class="html not-front logged-in two-sidebars page-node page-node- page-node-230367 node-type-page ff ff32 win desktop i18n-en" >
-  <div class="page">
 
-  <div class="header-wrapper">
-    <header class="header clearfix" role="banner">
-    
-<a class="header-logo" href="http://adbdev.org/" title="Home" rel="home">
-    <span>Asian Development Bank</span>
-  </a>
 
-<nav class="header-secondary-links" role="navigation">
-  <ul class="inline-block">
-    <li class="first"><a href="http://adbdev.org/zh/main">中文</a></li>
-    <li><a href="http://adbdev.org/careers">Careers</a></li>
-    <li><a href="http://adbdev.org/contacts">Contacts</a></li>
-    <li><a href="http://alerts.adb.org/">e-Alerts</a></li>
-    <li class="last dropdown"><a href="#" data-toggle="dropdown">Follow ADB<!-- <span class="caret"></span> --></a>
-      <ul class="dropdown-menu header-follow" role="menu">
-        <li class="first"><a class="follow-alerts" href="http://alerts.adb.org/" title="Subscribe to our e-mail alerts"><span></span> E-mail Alerts</a></li>
-        <li><a class="follow-rss" href="http://adbdev.org/rss" title="Subscribe to our RSS feeds"><span></span> RSS</a></li>
-        <!-- <li><a class="follow-blog" href="http://blogs.adb.org/" title="Join the conversation!"><span></span> Blog</a></li> -->
-        <li><a class="follow-twitter" href="https://twitter.com/ADB_HQ" title="Follow us on Twitter"><span></span> Twitter</a></li>
-        <li><a class="follow-youtube" href="http://www.youtube.com/user/AsianDevelopmentBank" title="Subscribe to our Youtube Channel"><span></span> Youtube</a></li>
-        <li><a class="follow-facebook" href="https://www.facebook.com/AsianDevBank" title="Find us on Facebook"><span></span> Facebook</a></li>
-        <li><a class="follow-flickr" href="http://flickr.com/asiandevelopmentbank" title="Follow us on Flickr"><span></span> Flickr</a></li>
-        <li><a class="follow-scribd" href="http://www.scribd.com/AsianDevelopmentBank" title="Follow us on Scribd"><span></span> Scribd</a></li>
-        <li class="last"><a class="follow-linkedin" href="https://www.linkedin.com/company/asian-development-bank" title="Follow us on LinkedIn"><span></span> LinkedIn</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
 
-<div class="xxx header-searchbox searchbox collapse">
-  <form action="http://adbdev.org/search" method="get" id="views-exposed-form-search-search" accept-charset="UTF-8"><div>
-          <div class="form-item form-type-textfield form-item-keywords">
- <input type="text" id="edit-keywords" name="keywords" value="" size="30" maxlength="128" class="form-text" />
-</div>
-        <input type="submit" id="edit-submit-search" name="" value="Apply" class="form-submit" />
-</div></form> 
-</div>
 
-<button id="toggle-searchbox" class="btn btn-primary btn-toggle-search" data-toggle="button" type="button"><span class="element-invisible">Toggle search</span><span class="icon"></span></button>
 
-<button id="toggle-mainnav" class="btn btn-primary btn-toggle-nav" data-toggle="button" type="button"><span class="element-invisible">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 
-    </header>
-  </div><!-- /header-wrapper -->
-  
-  <div class="navbar-wrapper collapse">
-    <div class="navbar clearfix">
-      <nav class="main-nav" role="navigation" tabindex="-1">
-        <ul>
-	<li class="first"><a href="http://adbdev.org/about">About ADB</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					<a href="http://adbdev.org/about">Organization</a>
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/about/overview">Overview</a></li>
-						<li><a href="http://adbdev.org/about/key-facts">Key Facts</a></li>
-						<li><a href="http://adbdev.org/about/members">Members</a></li>
-						<li><a href="http://adbdev.org/about/board-governors">Board of Governors</a></li>
-						<li><a href="http://adbdev.org/about/board-directors">Board of Directors</a></li>
-						<li><a href="http://adbdev.org/about/management/takehiko-nakao">President</a></li>
-						<li><a href="http://adbdev.org/about/management">Management</a></li>
-						<li><a href="http://adbdev.org/about/departments-offices">Departments and Offices</a></li>
-						<li><a href="http://adbdev.org/about/policies-and-strategies">Policies and Strategies</a></li>
-						<li><a href="http://adbdev.org/about/partners">Partners</a></li>
-						<li><a href="http://adbdev.org/about/annual-meetings">Annual Meetings</a></li>
-						<li><a href="http://adbdev.org/about/history">History</a></li>
-						<li class="last"><a href="http://adbdev.org/about/faqs">FAQs</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<a href="#">Financing Operations</a>
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/site/public-sector-financing/main">Public Sector (Sovereign) Financing</a></li>
-						<li><a href="http://adbdev.org/site/private-sector-financing/main">Private Sector (Nonsovereign) Financing</a></li>
-						<li><a href="http://adbdev.org/site/funds/main">Funds and Resources</a></li>
-						<li><a href="http://adbdev.org/site/adf/main">Asian Development Fund</a></li>
-						<li><a href="http://adbdev.org/site/aif/main">ASEAN Infrastructure Fund</a></li>
-						<li class="last"><a href="http://adbdev.org/site/investors/main">Investor Information</a> <a href="http://adbdev.org/jp/investors/main">[日本語]</a></li>
-					</ul>
 
-					Opportunities
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/site/careers/main">Careers</a></li>
-						<li><a href="http://adbdev.org/site/business-opportunities/main">Business Opportunities</a></li>
-						<li><a href="http://adbdev.org/consulting">Consulting Services</a></li>
-						<li class="last"><a href="http://adbdev.org/jsp">ADB-Japan Scholarship Program</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<a href="#">Contacts</a>
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/contacts/main">Headquarters and Field Offices</a></li>
-						<li><a href="http://adbdev.org/contacts/management-senior-staff">Departments, Management and Senior Staff</a></li>
-						<li><a href="http://adbdev.org/contacts/external-visitors-program">External Visitors Program</a></li>
-						<li><a href="http://adbdev.org/news/contacts">Media Contacts</a></li>
-						<li><a href="http://adbdev.org/contacts/information-requests-and-feedback">Information Requests and Feedback</a></li>
-						<li><a href="http://adbdev.org/contacts/pic">Public Information Center</a></li>
-						<li>&nbsp;</li>
-						<li class="last"><a href="http://adbdev.org/site/evaluation/main">Independent Evaluation at the ADB</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					Transparency
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/site/accountability-mechanism/main">Accountability Mechanism</a></li>
-						<li><a href="http://adbdev.org/site/ngos/main">ADB and Civil Society</a></li>
-						<li><a href="http://adbdev.org/site/integrity/main">Anticorruption and Integrity</a></li>
-						<li><a href="http://adbdev.org/site/development-effectiveness/main">Development Effectiveness and Results</a></li>
-						<li><a href="http://adbdev.org/site/disclosure/main">Information Disclosure</a></li>
-						<li class="last"><a href="">Safeguards</a></li>
-					</ul>
-				</div>
 
-			</div>
-		</div>
-	</li>
-	<li><a href="http://adbdev.org/news">News &amp; Events</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					<a href="http://adbdev.org/news">News</a>
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/news/releases">News Releases</a></li>
-						<li><a href="http://adbdev.org/news/briefs">Briefs: Loans and Technical Assistance</a></li>
-						<li><a href="http://adbdev.org/news/speeches">Speeches</a></li>
-						<li><a href="http://adbdev.org/news/op-ed">Op-Eds and Opinion</a></li>
-						<li><a href="http://adbdev.org/features/">Features</a></li>
-						<li class="last"><a href="http://adbdev.org/news/media/broadcasters">For Broadcasters</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<a href="http://adbdev.org/news/events/calendar">Events</a>
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/news/events/calendar">Calendar of Events</a></li>
-						<li class="last"><a href="#">Astana 2014: 47th Annual Meeting</a></li>
-					</ul>
 
-					Multimedia
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/news/media/videos">Videos</a></li>
-						<li><a href="http://adbdev.org/news/media/photo-essays">Photo Essays</a></li>
-						<li><a href="http://adbdev.org/news/infographics">Infographics</a></li>
-						<li><a href="http://adbdev.org/news/media/photos-download">Photos</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<ul>
-						<li class="first"><a href="http://adbdev.org/news/experts">ADB Experts</a></li>
-						<li><a href="http://adbdev.org/news/social-media-hub">Social Media Hub</a></li>
-						<li class="last"><a href="http://adbdev.org/news/contacts/">Media Contacts</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li><a href="http://adbdev.org/data">Data &amp; Research</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					<ul>
-						<li class="first"><a href="http://adbdev.org/data">Data &amp; Research Overview</a></li>
-						<li><a href="http://adbdev.org/data/publications/main">Economic Research Publications</a></li>
-						<li><a href="http://adbdev.org/data/statistics">Statistics and Databases</a></li>
-						<li><a href="http://adbdev.org/data/economic-research-initiatives">Featured Economic Research Initiatives</a></li>
-						<li class="last"><a href="http://adbdev.org/data/contacts">Contacts</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li><a href="http://adbdev.org/publications">Publications</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					<ul>
-						<li class="first"><a href="#">Overview</a></li>
-						<li class="last"><a href="#">All Publications</a></li>
-					</ul>
 
-					Browse by Type
 
-					<ul>
-						<li class="first"><a href="#">Books</a></li>
-						<li><a href="#">Reports</a></li>
-						<li><a href="#">Papers and Briefs</a></li>
-						<li><a href="#">Serials</a></li>
-						<li><a href="#">Conference Proceedings</a></li>
-						<li><a href="#">Guides</a></li>
-						<li><a href="#">Policies, Strategies, Plans</a></li>
-						<li><a href="#">Official Records</a></li>
-						<li class="last"><a href="#">Brochures and Flyers</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					See Also
 
-					<ul>
-						<li class="first"><a href="#">Country Planning Documents</a></li>
-						<li><a href="#">Project Documents</a></li>
-						<li class="last"><a href="#">Evaluation Documents</a></li>
-					</ul>
-				</div>
-			</div>
-			</div>
-	</li>
-	<li><a href="http://adbdev.org/countries">Countries</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					Countries with Operations
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/countries/afghanistan/main">Afghanistan</a></li>
-						<li><a href="http://adbdev.org/countries/armenia/main">Armenia</a></li>
-						<li><a href="http://adbdev.org/countries/azerbaijan/main">Azerbaijan</a></li>
-						<li><a href="http://adbdev.org/countries/bangladesh/main">Bangladesh</a></li>
-						<li><a href="http://adbdev.org/countries/bhutan/main">Bhutan</a></li>
-						<li><a href="http://adbdev.org/countries/cambodia/main">Cambodia</a></li>
-						<li><a href="http://adbdev.org/countries/prc/main" class="inline-link">China, People's Republic of</a> <a href="http://adbdev.org/zh/prc/main" class="inline-link">[中文]</a></li>
-						<li><a href="http://adbdev.org/countries/cook-islands/main">Cook Islands</a></li>
-						<li><a href="http://adbdev.org/countries/fiji/main">Fiji</a></li>
-						<li><a href="http://adbdev.org/countries/georgia/main">Georgia</a></li>
-						<li><a href="http://adbdev.org/countries/india/main">India</a></li>
-						<li><a href="http://adbdev.org/countries/indonesia/main" class="inline-link">Indonesia</a> <a href="http://adbdev.org/id/indonesia/main" class="inline-link">[Bahasa Indonesia]</a></li>
-						<li><a href="http://adbdev.org/countries/kazakhstan/main">Kazakhstan</a></li>
-						<li class="last"><a href="http://adbdev.org/countries/kiribati/main">Kiribati</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<ul>
-						<li class="first">&nbsp;</li>
-						<li><a href="http://adbdev.org/countries/kyrgyz-republic/main">Kyrgyz Republic</a></li>
-						<li><a href="http://adbdev.org/countries/lao-pdr/main">Lao PDR</a></li>
-						<li><a href="http://adbdev.org/countries/malaysia/main">Malaysia</a></li>
-						<li><a href="http://adbdev.org/countries/maldives/main">Maldives</a></li>
-						<li><a href="http://adbdev.org/countries/marshall-islands/main">Marshall Islands</a></li>
-						<li><a href="http://adbdev.org/countries/micronesia/main">Micronesia, Federated States of</a></li>
-						<li><a href="http://adbdev.org/countries/mongolia/main">Mongolia</a></li>
-						<li><a href="http://adbdev.org/countries/myanmar/main">Myanmar</a></li>
-						<li><a href="http://adbdev.org/countries/nauru/main">Nauru</a></li>
-						<li><a href="http://adbdev.org/countries/nepal/main">Nepal</a></li>
-						<li><a href="http://adbdev.org/countries/pakistan/main">Pakistan</a></li>
-						<li><a href="http://adbdev.org/countries/palau/main">Palau</a></li>
-						<li><a href="http://adbdev.org/countries/papua-new-guinea/main">Papua New Guinea</a></li>
-						<li class="last"><a href="http://adbdev.org/countries/philippines/main">Philippines</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<ul>
-						<li class="first">&nbsp;</li>
-						<li><a href="http://adbdev.org/countries/samoa/main">Samoa</a></li>
-						<li><a href="http://adbdev.org/countries/solomon-islands/main">Solomon Islands</a></li>
-						<li><a href="http://adbdev.org/countries/sri-lanka/main">Sri Lanka</a></li>
-						<li><a href="http://adbdev.org/countries/tajikistan/main">Tajikistan</a></li>
-						<li><a href="http://adbdev.org/countries/thailand/main">Thailand</a></li>
-						<li><a href="http://adbdev.org/countries/timor-leste/main">Timor-Leste</a></li>
-						<li><a href="http://adbdev.org/countries/tonga/main">Tonga</a></li>
-						<li><a href="http://adbdev.org/countries/turkmenistan/main">Turkmenistan</a></li>
-						<li><a href="http://adbdev.org/countries/tuvalu/main">Tuvalu</a></li>
-						<li><a href="http://adbdev.org/countries/uzbekistan/main">Uzbekistan</a></li>
-						<li><a href="http://adbdev.org/countries/vanuatu/main">Vanuatu</a></li>
-						<li class="last"><a href="http://adbdev.org/countries/viet-nam/main">Viet Nam</a></li>
-					</ul>
 
-					<ul>
-						<li class="first last"><a href="http://adbdev.org/countries/countries/documents/main">Country Planning Documents</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<a href="#">Subregional Programs</a>
 
-					<ul>
-						<li class="fist"><a href="http://adbdev.org/bimp-eaga">Brunei Darussalam-Indonesia-Malaysia-Philippines East ASEAN Growth Area (BIMP-EAGA)</a></li>
-						<li><a href="http://adbdev.org/carec">Central Asia Regional Economic Cooperation (CAREC)</a></li>
-						<li><a href="http://adbdev.org/gms">Greater Mekong Subregion (GMS)</a></li>
-						<li><a href="http://adbdev.org/imt-gt">Indonesia-Malaysia-Thailand Growth Triangle (IMT-GT)</a></li>
-						<li class="last"><a href="http://adbdev.org/sasec">South Asia Subregional Economic Cooperation (SASEC)</a></li>
-					</ul>
 
-					<a href="#">Other Offices</a>
 
-					<ul>
-						<li class="fist"><a href="http://adbdev.org/ero">European Representative Office</a></li>
-						<li><a href="http://adbdev.org/jro" class="inline-link">Japanese Representative Office</a> <a href="http://adbdev.org/jp/japan/main" class="inline-link">[日本語]</a></li>
-						<li><a href="http://adbdev.org/naro">North American Representative Office</a></li>
-						<li><a href="http://adbdev.org/plco">Pacific Liaison and Coordination Office</a></li>
-						<li class="last"><a href="http://adbdev.org/spso">Pacific Subregional Office</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li><a href="http://adbdev.org/projects">Projects</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					<ul>
-						<li class="first"><a href="http://adbdev.org/projects">Projects Overview</a></li>
-						<li><a href="http://adbdev.org/projects/search/21304">Show Proposed Projects</a></li>
-						<li><a href="http://adbdev.org/projects/search/21303">Show Approved Projects</a></li>
-						<li><a href="http://adbdev.org/projects/documents">Project Documents</a></li>
-						<li><a href="http://adbdev.org/projects/cycle">Project Cycle</a></li>
-						<li><a href="http://adbdev.org/projects/operations">Operations</a></li>
-						<li><a href="http://adbdev.org/projects/results-adb-supported-operations">Results</a></li>
-						<li><a href="http://adbdev.org/projects/terms-use">Using ADB Project Data</a></li>
-						<li><a href="http://adbdev.org/projects/success-stories">Success Stories</a></li>
-						<li><a href="http://adbdev.org/projects/websites">Featured Projects</a></li>
-						<li><a href="http://adbdev.org/projects/archive">Archive</a></li>
-						<li class="last"><a href="http://adbdev.org/projects/search">Advanced Search</a></li>
-					</ul>
-				</div>
-			</div>
-			</div>
-	</li>
-	<li><a href="http://adbdev.org/focus-areas">Focus Areas</a>
-		<div class="mega-menu-wrapper">
-			<div class="mega-menu">
-				<div class="column">
-					Sectors
 
-					<ul>
-						<li class="first"><a href="http://adbdev.org/sectors/agriculture/main">Agriculture</a></li>
-						<li><a href="http://adbdev.org/sectors/education/main">Education</a></li>
-						<li><a href="http://adbdev.org/sectors/energy/main">Energy</a></li>
-						<li><a href="http://adbdev.org/sectors/finance/main">Finance</a></li>
-						<li><a href="http://adbdev.org/sectors/health/main">Health</a></li>
-						<li><a href="http://adbdev.org/sectors/industry-and-trade/main">Industry and Trade</a></li>
-						<li><a href="http://adbdev.org/sectors/ict/main">Information and Communication Technology</a></li>
-						<li><a href="http://adbdev.org/sectors/governance/main">Public Sector Management</a></li>
-						<li><a href="http://adbdev.org/sectors/transport/main">Transport</a></li>
-						<li class="last"><a href="http://adbdev.org/sectors/water/main">Water</a></li>
-					</ul>
-				</div>
 
-				<div class="column">
-					<a href="#">Themes</a>
 
-					<ul>
-						<li class="first"><a href="#">Capacity Development</a></li>
-						<li><a href="#">Climate Change</a></li>
-						<li><a href="#">Environmental Sustainability</a></li>
-						<li><a href="#">Gender and Development</a></li>
-						<li><a href="#">Governance</a></li>
-						<li><a href="#">Poverty Reduction</a></li>
-						<li><a href="#">Private Sector Development</a></li>
-						<li><a href="#">Regional Cooperation and Integration</a></li>
-						<li><a href="#">Social Development</a></li>
-						<li class="last"><a href="#">Urban Development</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</li>
-</ul>      </nav>
-    </div><!-- /navbar -->
-  </div><!-- /navbar-wrapper -->
+ Asian_Development_Bank
+    * 中文
+    * Careers
+    * Contacts
+    * e-Alerts
+    * Follow_ADB
+          o E-mail_Alerts
+          o RSS
+          o Twitter
+          o Youtube
+          o Facebook
+          o Flickr
+          o Scribd
+          o LinkedIn
+[keywords                      ]
+[Apply]
+Toggle search Toggle navigation
+    * About_ADB
+      Organization
+          o Overview
+          o Key_Facts
+          o Members
+          o Board_of_Governors
+          o Board_of_Directors
+          o President
+          o Management
+          o Departments_and_Offices
+          o Policies_and_Strategies
+          o Partners
+          o Annual_Meetings
+          o History
+          o FAQs
+      Financing_Operations
+          o Public_Sector_(Sovereign)_Financing
+          o Private_Sector_(Nonsovereign)_Financing
+          o Funds_and_Resources
+          o Asian_Development_Fund
+          o ASEAN_Infrastructure_Fund
+          o Investor_Information [日本語]
+      Opportunities
+          o Careers
+          o Business_Opportunities
+          o Consulting_Services
+          o ADB-Japan_Scholarship_Program
+      Contacts
+          o Headquarters_and_Field_Offices
+          o Departments,_Management_and_Senior_Staff
+          o External_Visitors_Program
+          o Media_Contacts
+          o Information_Requests_and_Feedback
+          o Public_Information_Center
+          o  
+          o Independent_Evaluation_at_the_ADB
+      Transparency
+          o Accountability_Mechanism
+          o ADB_and_Civil_Society
+          o Anticorruption_and_Integrity
+          o Development_Effectiveness_and_Results
+          o Information_Disclosure
+          o Safeguards
+    * News_&amp;_Events
+      News
+          o News_Releases
+          o Briefs:_Loans_and_Technical_Assistance
+          o Speeches
+          o Op-Eds_and_Opinion
+          o Features
+          o For_Broadcasters
+      Events
+          o Calendar_of_Events
+          o Astana_2014:_47th_Annual_Meeting
+      Multimedia
+          o Videos
+          o Photo_Essays
+          o Infographics
+          o Photos
+          o ADB_Experts
+          o Social_Media_Hub
+          o Media_Contacts
+    * Data_&amp;_Research
+          o Data_&amp;_Research_Overview
+          o Economic_Research_Publications
+          o Statistics_and_Databases
+          o Featured_Economic_Research_Initiatives
+          o Contacts
+    * Publications
+          o Overview
+          o All_Publications
+      Browse by Type
+          o Books
+          o Reports
+          o Papers_and_Briefs
+          o Serials
+          o Conference_Proceedings
+          o Guides
+          o Policies,_Strategies,_Plans
+          o Official_Records
+          o Brochures_and_Flyers
+      See Also
+          o Country_Planning_Documents
+          o Project_Documents
+          o Evaluation_Documents
+    * Countries
+      Countries with Operations
+          o Afghanistan
+          o Armenia
+          o Azerbaijan
+          o Bangladesh
+          o Bhutan
+          o Cambodia
+          o China,_People's_Republic_of [中文]
+          o Cook_Islands
+          o Fiji
+          o Georgia
+          o India
+          o Indonesia [Bahasa_Indonesia]
+          o Kazakhstan
+          o Kiribati
+          o  
+          o Kyrgyz_Republic
+          o Lao_PDR
+          o Malaysia
+          o Maldives
+          o Marshall_Islands
+          o Micronesia,_Federated_States_of
+          o Mongolia
+          o Myanmar
+          o Nauru
+          o Nepal
+          o Pakistan
+          o Palau
+          o Papua_New_Guinea
+          o Philippines
+          o  
+          o Samoa
+          o Solomon_Islands
+          o Sri_Lanka
+          o Tajikistan
+          o Thailand
+          o Timor-Leste
+          o Tonga
+          o Turkmenistan
+          o Tuvalu
+          o Uzbekistan
+          o Vanuatu
+          o Viet_Nam
+          o Country_Planning_Documents
+      Subregional_Programs
+          o Brunei_Darussalam-Indonesia-Malaysia-Philippines_East_ASEAN_Growth
+            Area_(BIMP-EAGA)
+          o Central_Asia_Regional_Economic_Cooperation_(CAREC)
+          o Greater_Mekong_Subregion_(GMS)
+          o Indonesia-Malaysia-Thailand_Growth_Triangle_(IMT-GT)
+          o South_Asia_Subregional_Economic_Cooperation_(SASEC)
+      Other_Offices
+          o European_Representative_Office
+          o Japanese_Representative_Office [日本語]
+          o North_American_Representative_Office
+          o Pacific_Liaison_and_Coordination_Office
+          o Pacific_Subregional_Office
+    * Projects
+          o Projects_Overview
+          o Show_Proposed_Projects
+          o Show_Approved_Projects
+          o Project_Documents
+          o Project_Cycle
+          o Operations
+          o Results
+          o Using_ADB_Project_Data
+          o Success_Stories
+          o Featured_Projects
+          o Archive
+          o Advanced_Search
+    * Focus_Areas
+      Sectors
+          o Agriculture
+          o Education
+          o Energy
+          o Finance
+          o Health
+          o Industry_and_Trade
+          o Information_and_Communication_Technology
+          o Public_Sector_Management
+          o Transport
+          o Water
+      Themes
+          o Capacity_Development
+          o Climate_Change
+          o Environmental_Sustainability
+          o Gender_and_Development
+          o Governance
+          o Poverty_Reduction
+          o Private_Sector_Development
+          o Regional_Cooperation_and_Integration
+          o Social_Development
+          o Urban_Development
+ Toggle navigation
+****** 36188-023: Secondary Towns Integrated Urban Environmental Improvement
+Project ******
+    * Facebook
+    * Twitter
+    * LinkedIn
+    * Print
+    * E-mail
+    * PDF
+    * Bookmark
+***** Project Data Sheet (PDS): Overview *****
+**** Description ****
+The objective of the project is to develop reliable, affordable, and effective
+municipal infrastructure and to strengthening the capacity of municipalities
+and the central government for project management and operation. The project
+area is Biratnagar, Birgunj, Butwal municipalities and Kavre Valley (Panauti,
+Dhulikhel and Banepa municipalities). The project was approved in 6 July 2010
+and the planned project closing date is 30 June 2016. Read_More
+Country                         Nepal
+Project Number                  36188-023
+Type or Modality of Assistance  Loan
+Financing                       Public sector (Sovereign)
+Status                          Approved
+Approval Numbers                Loan No. 2650
+                                Loan No. 8249
+Approval Date                   06 Jul 2010
+ADB_Financing ($ thousand)      60,000
+                                Biratnagar, Birgunj, Butwal and Kavre
+Geographical Location           valley (Banepa, Dhulikhel, and Panauti)
+                                municipalities
+                                Transport
+Sector                          Water supply and other municipal
+                                infrastructure and services
+                                Urban roads and traffic management
+                                Other urban services
+                                Urban policy, institutional and capacity
+Subsector                       development
+                                Urban sewerage
+                                Urban solid waste management
+                                Urban water supply
+Strategic Agendas               Environmentally sustainable growth (ESG)
+                                Inclusive economic growth (IEG)
+                                Gender equity and mainstreaming (GEM)
+Drivers of Change               Governance and capacity development (GCD)
+                                Partnerships (PAR)
+                                Private sector development (PSD)
+Gender Equity and Mainstreaming Category 2: Effective gender mainstreaming
+Categories                      (EGM)
+                                Environment: B
+Safeguard Categories            Resettlement: B
+                                Indigenous People: B
+**** Related Projects ****
+    * 36188-012:_Preparing_the_Secondary_Towns_Integrated_Urban_Environmental
+      Improvement_Project
+ 
+Project Data Sheets (PDS) contain summary information on the project or
+program. Because the PDS is a work in progress, some information may not be
+included in its initial version but will be added as it becomes available.
+Information about proposed projects is tentative and indicative.
+The Public_Communications_Policy_(PCP) recognizes that transparency and
+accountability are essential to development effectiveness. It establishes the
+disclosure requirements for documents and information ADB produces or requires
+to be produced.
+The Accountability_Mechanism provides a forum where people adversely affected
+by ADB-assisted projects can voice and seek solutions to their problems and
+report alleged noncompliance of ADB's operational policies and procedures.
+In preparing any country program or strategy, financing any project, or by
+making any designation of, or reference to, a particular territory or
+geographic area in this document, the Asian Development Bank does not intend to
+make any judgments as to the legal or other status of any territory or area.
 
-  <div class="main-wrapper">
-    <div class="main clearfix">
-      
-      <div class="main-content column" role="main">
-                <a id="main-content"></a>
-                <button id="toggle-sidenav" class="btn btn-primary btn-toggle-nav" data-toggle="button" type="button"><span class="element-invisible">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                  <h1 class="page-title title" id="page-title">36188-023: Secondary Towns Integrated Urban Environmental Improvement Project</h1>
-   
-<div class="article-toolbar hidden-print">
-<ul class="links inline"><li class="service-links-facebook first"><a href="http://www.facebook.com/sharer.php?u=http://adb.org/projects/details?page=overview&proj_id=36188-023" title="Share on Facebook" class="service-links-facebook" rel="nofollow" target="_blank">Facebook</a></li>
-<li class="service-links-twitter"><a href="http://twitter.com/share?url=http://adb.org/projects/details?page=overview&proj_id=36188-023" title="Share this on Twitter" class="service-links-twitter" rel="nofollow" target="_blank">Twitter</a></li>
-<li class="service-links-linkedin"><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://adb.org/projects/details?page=overview&proj_id=36188-023&amp;title=Project%20Data%20Sheet&amp;summary=36188-023: Secondary Towns Integrated Urban Environmental Improvement Project&amp;source=Asian%20Development%20Bank" title="Publish this post to LinkedIn" class="service-links-linkedin" rel="nofollow" target="_blank">LinkedIn</a></li>
-<li class="service-links-print"><a href="http://adb.org/print/projects/36188-023/main" title="Printable version" class="service-links-print" rel="nofollow" target="_blank">Print</a></li>
-<li class="service-links-printmail"><a href="http://adb.org/printmail/projects/36188-023/main" title="Send to a friend" class="service-links-printmail" rel="nofollow" target="_blank">E-mail</a></li>
-<li class="service-links-printpdf"><a href="http://adb.org/printpdf/projects/36188-023/main" title="PDF version" class="service-links-printpdf" rel="nofollow" target="_blank">PDF</a></li>
-<li class="service-links-favorite last"><a href="http://adb.org/projects/details?page=overview&proj_id=36188-023&amp;favtitle=36188-023: Secondary Towns Integrated Urban Environmental Improvement Project" style="display:none;" title="Add this page in your favorites" class="service-links-favorite" rel="nofollow" target="_blank">Bookmark</a></li>
-</ul></div>
+**** Projects ****
+    * Overview
+    * Details
+    * Financing
+    * Business_Opportunities
+    * Documents
 
-<h2>Project Data Sheet (PDS): Overview</h2>
-<h3>Description</h3><p>The objective of the project is to develop reliable, affordable, and effective municipal infrastructure and to strengthening the capacity of municipalities and the central government for project management and operation. The project area is Biratnagar, Birgunj, Butwal municipalities and Kavre Valley (Panauti, Dhulikhel and Banepa municipalities). The project was approved in 6 July 2010 and the planned project closing date is 30 June 2016. <a href='/projects/details?page=details&proj_id=36188-023' class='go' />Read More</a></p>
-<table class="table-striped">
-<tr>
-	<th width="200px">Country</th>
-	<td>
-	Nepal<br />	</td>
-</tr>
-  <tr>
-      <th>Project Number</th>
-      <td>
-	  36188-023	  </td>
-  </tr>
-  <tr>
-      <th>Type or Modality of Assistance</th>
-      <td>
-	  	Loan<br />	  </td>
-  </tr>
-    <tr>
-      <th>Financing</th>
-      <td>Public sector (Sovereign)</td>
-  </tr>
-    <tr>
-      <th>Status</th>
-      <td>Approved</td>
-  </tr>
-  <tr>
-      <th>Approval Numbers</th>
-      <td>
-		Loan No. 2650<br />Loan No. 8249<br />	  </td>
-  </tr>
-  <tr>
-      <th>Approval Date</th>
-      <td>
-	  	06 Jul 2010	  	</td>
-  </tr>
-        <tr>
-      <th><a href="/projects/details?page=financing&proj_id=36188-023">ADB Financing</a> ($ thousand)</th>
-      <td>60,000</td>
-  </tr>
-    <tr>
-      <th>Geographical Location</th>
-      <td>Biratnagar, Birgunj, Butwal and Kavre valley (Banepa, Dhulikhel, and Panauti) municipalities</td>
-  </tr>
-	<tr>
-	  <th>Sector</th>
-	  <td>
-		  Transport<br />Water supply and other municipal infrastructure and services<br />	  </td>
-	</tr>
-		<tr>
-	  <th>Subsector</th>
-	  <td>
-		  Urban roads and traffic management<br />Other urban services<br />Urban policy, institutional and capacity development<br />Urban sewerage<br />Urban solid waste management<br />Urban water supply	  </td>
-	</tr>
-		<tr>
-	  <th>Strategic Agendas</th>
-	  <td>
-		  Environmentally sustainable growth (ESG)<br />Inclusive economic growth (IEG)<br />	  </td>
-	</tr>
-	<tr>
-	  <th>Drivers of Change</th>
-	  <td>
-		  Gender equity and mainstreaming (GEM)<br />Governance and capacity development (GCD)<br />Partnerships (PAR)<br />Private sector development (PSD)<br />	  </td>
-	</tr>
-	<tr>
-		<th><strong>Gender Equity and Mainstreaming Categories</strong></th>
-		<td>Category 2: Effective gender mainstreaming (EGM)</td>
-	</tr>
-  <tr>
-      <th>Safeguard Categories</th>
-      <td>
-          <strong>Environment: </strong> B <br />
-          <strong>Resettlement: </strong> B <br />
-          <strong>Indigenous People: </strong> B      </td>
-  </tr>
-</table>
+**** Responsible ADB Officer ****
+    * Laxmi_Sharma_(Request_for_information)
+ 
+**** Responsible ADB Department ****
+    * South Asia Department
+ 
+**** Responsible ADB Divisions ****
+    * Nepal Resident Mission
+ 
+**** Executing Agencies ****
+    * Ministry of Physical Infrastructure and Transport
+ 
+**** PDS Creation Date ****
+    * 19 Jul 2010
+ 
+**** Last PDS Update ****
+    * 22 Oct 2014
+ 
+**** Related Links ****
+    * More_on_ADB's_work_in_Nepal
+    * All_projects_in_Nepal
+    * All_projects_in_the_Transport_sector
+    * All_projects_in_the_Water_supply_and_other_municipal_infrastructure_and
+      services_sector
+    * Public_Sector_(Sovereign)_Financing
+    * Gender_Mainstreaming_Categories
+    * Safeguard_Categories
+ 
+ 
+Search/Browse_Projects
+* You are here *
+    * Projects
+    * Overview
+Page_Top
+© 2014 Asian Development Bank.
+    * Sitemap
+    * Website_FAQs
+    * Terms_of_Use
+    * E-mail_Alerts
+    * RSS
+    * Twitter
+    * Youtube
+    * Facebook
+    * Flickr
+    * Scribd
+    * LinkedIn
+===============================================================================
+*** Asian Development Bank ***
+     Headquarters: 6 ADB Avenue, Mandaluyong City 1550, Metro Manila,
+     Philippines
+ +_63_2_632_4444
+ + 63 2 636 2444
+ADB_Contacts
+Access_to_Information
+Fraud_&amp;_Corruption_Hotline (+_63_2_632_5004)
+*** Resources For ***
+    * Bond_Investors
+    * Businesses_and_Consultants
+    * Civil_Society
+    * Job_Seekers
+    * Journalists
+    * Private_Sector_Project_Investors
+*** Other ADB Sites ***
+    * ADB_Compliance_Review_Panel
+    * ADB_Institute_(ADBI)
+    * Asia_Pathways_(ADBI_Blog)
+    * Asia_Regional_Integration_Center
+    * Asian_Bonds_Online
+    * Asian_International_Economists_Network
+    * Asian_Development_Blog
+*** Alerts and Mobile Apps ***
+*** e-Alerts ***
+Sign_up_to_our_e-mail_alerts or subscribe_to_our_RSS_feeds to get the latest
+information from ADB.
+*** ADB Mobile Apps ***
+Get up-to-date news, information, and multimedia content on your mobile device
+with ADB_Mobile_Apps.
+===============================================================================
+ADB encourages websites and blogs to link to its web pages. Articles may be
+republished without alteration with the attribution statement “This article was
+first published by the Asian Development Bank (www.adb.org)" and a clickable
+link back to adb.org.
 
-<h3>Related Projects</h3><div class="view view-projects view-id-projects view-display-id-projects_related view-dom-id-9">
-    
-  
-  
-      <div class="view-content content-with-qtip">
-      <div class="item-list">    <ul>          <li class="views-row views-row-1 views-row-odd views-row-first views-row-last">    
-  <div class="views-field views-field-title">        <span class="field-content"><a href="/projects/36188-012/main">36188-012: Preparing the Secondary Towns Integrated Urban Environmental Improvement Project</a></span>  </div></li>
-      </ul></div>    </div>
-  
-  
-  
-  
-  
-  
-</div> <p>&nbsp;</p><p><strong>Project Data Sheets (PDS)</strong> contain summary information on the project or program. Because the PDS is a work in progress, some information may not be included in its initial version but will be added as it becomes available. Information about proposed projects is tentative and indicative.</p><p>The <a href="http://www.adb.org/site/disclosure/main"><strong>Public Communications Policy (PCP)</strong></a> recognizes that transparency and accountability are essential to development effectiveness. It establishes the disclosure requirements for documents and information ADB produces or requires to be produced.</p><p>The <a href="http://www.adb.org/site/accountability-mechanism/main"><strong>Accountability Mechanism</strong></a> provides a forum where people adversely affected by ADB-assisted projects can voice and seek solutions to their problems and report alleged noncompliance of ADB's operational policies and procedures.</p><p class="small-print">In preparing any country program or strategy, financing any project, or by making any designation of, or reference to, a particular territory or geographic area in this document, the Asian Development Bank does not intend to make any judgments as to the legal or other status of any territory or area.</p>
-</div>
-<!-- /main-content -->
-
-      
-<aside class="region region-sidebar-first column">
-<div id="block-menu-block-3" class="block block-menu-block contextual-links-region first last odd">
-<h3 class="block-title">Projects</h3>
-<div class="menu-block-wrapper menu-block-3 menu-name-menu-countries parent-mlid-0 menu-level-2">
-<ul class="menu">
-	<li class="active"><a href="/projects/details?page=overview&proj_id=36188-023" class="active-trail active">Overview</a></li>
-	<li class=""><a href="/projects/details?page=details&proj_id=36188-023" class="">Details</a></li>	<li class=""><a href="/projects/details?page=financing&proj_id=36188-023" class="">Financing</a></li>
-	<li class=""><a href="/projects/details?page=business-opportunities&proj_id=36188-023" class="">Business Opportunities</a></li>	<li class=""><a href="/projects/36188-023/documents" class="">Documents</a></li>
-</ul></div>
-
-</div>
-</aside>
-
-<aside class="region region-sidebar-second column">
-<div id="block-node-fields-block-1" class="block block-node-fields-block contextual-links-region field-related-content first last odd">
-    <!--
-	<h3 class="block-title">Project Data Sheets (PDS)</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class="field-item"><a style="background: url('/sites/all/themes/adb2k11/images/sprite-printer.png') 0 5px no-repeat transparent; padding: 5px 0 5px 22px" href="/print/projects/36188-023/main" target="_blank">Print</a></li>
-		<li class="field-item"><a style="background: url('/sites/all/themes/adb2k11/images/icon-pdf-16x16.png') 0 5px no-repeat transparent; padding: 5px 0 5px 22px" href="/printpdf/projects/36188-023/main" target="_blank">Download</a></li>
-	</ul>
-	</div>
-	-->
-	<h3 class="block-title">Responsible ADB Officer</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class="field-item">
-		<a href='http://www.adb.org/forms/request-information-form?topic=projects&source=PDS&subject=36188-023&officer=lsharma@adb.org&division=NRM&projectcountry=NEP'>Laxmi Sharma (Request for information)</a>		</li>
-	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-
-	<h3 class="block-title">Responsible ADB Department</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class="field-item">South Asia Department</li>
-	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-
-	<h3 class="block-title">Responsible ADB Divisions</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class="field-item">Nepal Resident Mission</li>
-	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-
-	<h3 class="block-title">Executing Agencies</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-	<li class="field-item">Ministry of Physical Infrastructure and Transport</li>	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-
-	<h3 class="block-title">PDS Creation Date</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class="field-item">19 Jul 2010</li>
-	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-
-	<h3 class="block-title">Last PDS Update</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class="field-item">22 Oct 2014</li>
-	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-
-	<h3 class="block-title">Related Links</h3>
-	<div class="field field-name-field-related-content field-type-field-collection field-label-hidden item-list item-list-divider">
-	<ul class="field-items">
-		<li class='field-item'><a href='http://www.adb.org/countries/nepal/main'>More on ADB's work in Nepal</a></li><li class='field-item'><a href='http://www.adb.org/projects/search/499'>All projects in Nepal</a></li><li class='field-item'><a href='http://www.adb.org/projects/search/77635'>All projects in the Transport sector</a></li><li class='field-item'><a href='http://www.adb.org/projects/search/21285'>All projects in the Water supply and other municipal infrastructure and services sector</a></li><li class="field-item"><a href="http://www.adb.org/site/public-sector-financing/main">Public Sector (Sovereign) Financing</a></li><li class="field-item"><a href="http://www.adb.org/themes/gender/gender-mainstreaming-categories">Gender Mainstreaming Categories</a></li><li class="field-item"><a href="http://www.adb.org/site/safeguards/safeguard-categories">Safeguard Categories</a></li>	</ul>
-	</div>
-	<div class="clear">&nbsp;</div>
-<div class="clear">&nbsp;</div><p><a href="http://www.adb.org/projects/search" class="btn">Search/Browse Projects</a></p></div>
-</aside>
- 
- 
-</div><!-- /main -->
-</div><!-- /main-wrapper -->
-  
-  <div class="breadcrumb-wrapper">
-    <div class="breadcrumb clearfix">
-    <nav class="clearfix" role="navigation"><h6 class="element-invisible">You are here</h6><ul><li class="first"><span><a href="http://adbdev.org/" title="Home"><span class="ico ico-home ico-lg"></span></a></span></li><li><span><a href="http://adbdev.org/projects">Projects</a></span></li><li class="last active"><span>Overview</span></li></ul></nav>    <a class="page-top-link" href="#"><span class="ico ico-arrow-circle-up ico-lg"></span> Page Top</a>
-    </div>
-  </div>
-
-  <div class="footer-wrapper">
-    <footer class="footer" role="contentinfo">
-    
-<div class="footer-copyright-wrapper">
-  <p class="footer-copyright">
-    &copy; 2014 Asian Development Bank.   </p>
-  <ul class="footer-secondary-links inline-block">
-    <li class="first"><a href="http://adbdev.org/site-index">Sitemap</a></li>
-    <li><a href="http://adbdev.org/faqs-adborg">Website FAQs</a></li>
-    <li><a href="http://adbdev.org/terms-use">Terms of Use</a></li>
-  </ul>
-</div>
-
-<ul class="footer-follow inline-block">
-  <li class="first"><a class="follow-alerts" href="http://alerts.adb.org/" title="Subscribe to our e-mail alerts"><span>E-mail Alerts</span></a></li>
-  <li><a class="follow-rss" href="http://adbdev.org/rss" title="Subscribe to our RSS feeds"><span>RSS</span></a></li>
-  <!-- <li><a class="follow-blog" href="http://blogs.adb.org/" title="Join the conversation!"><span>Blog</span></a></li> -->
-  <li><a class="follow-twitter" href="https://twitter.com/ADB_HQ" title="Follow us on Twitter"><span>Twitter</span></a></li>
-  <li><a class="follow-youtube" href="http://www.youtube.com/user/AsianDevelopmentBank" title="Subscribe to our Youtube Channel"><span>Youtube</span></a></li>
-  <li><a class="follow-facebook" href="https://www.facebook.com/AsianDevBank" title="Find us on Facebook"><span>Facebook</span></a></li>
-  <li><a class="follow-flickr" href="http://flickr.com/asiandevelopmentbank" title="Follow us on Flickr"><span>Flickr</span></a></li>
-  <li><a class="follow-scribd" href="http://www.scribd.com/AsianDevelopmentBank" title="Follow us on Scribd"><span>Scribd</span></a></li>
-  <li class="last"><a class="follow-linkedin" href="https://www.linkedin.com/company/asian-development-bank" title="Follow us on LinkedIn"><span>LinkedIn</span></a></li>
-</ul>
-
-<hr>
-
-<div class="footer-columns clearfix">
-  <div class="column first">
-    <h4>Asian Development Bank</h4>
-    <div>
-      <address>
-        Headquarters: 6 ADB Avenue, Mandaluyong City 1550, Metro Manila, Philippines
-      </address>
-      <p>
-        <abbr class="ico ico-phone" title="Phone"></abbr> <a href="tel:+6326324444">+ 63 2 632 4444</a><br>
-        <abbr class="ico ico-print" title="Fax"></abbr> + 63 2 636 2444<br>
-        <a href="http://adbdev.org/contacts">ADB Contacts</a><br>
-        <a href="http://adbdev.org/site/disclosure/main">Access to Information</a><br>
-        <a href="http://adbdev.org/site/integrity/how-to-report-fraud">Fraud &amp; Corruption Hotline</a> <span class="fraud-hotline">(<a href="tel:+6326325004">+ 63 2 632 5004</a>)</span>
-      </p>
-    </div>
-  </div>
-  <div class="column">
-    <h4>Resources For</h4>
-    <div>
-      <ul class="links">
-        <li class="first"><a href="http://adbdev.org/investors">Bond Investors</a></li>
-        <li><a href="http://adbdev.org/business-opportunities">Businesses and Consultants</a></li>
-        <li><a href="http://adbdev.org/ngos">Civil Society</a></li>
-        <li><a href="http://adbdev.org/careers">Job Seekers</a></li>
-        <li><a href="http://adbdev.org/news">Journalists</a></li>
-        <li class="last"><a href="http://adbdev.org/private-sector-financing">Private Sector Project Investors</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="column">
-    <h4>Other ADB Sites</h4>
-    <div>
-      <ul class="links">
-        <li class="first"><a href="http://compliance.adb.org/">ADB Compliance Review Panel</a></li>
-        <li><a href="http://www.adbi.org/">ADB Institute (ADBI)</a></li>
-        <li><a href="http://www.asiapathways-adbi.org/">Asia Pathways (ADBI Blog)</a></li>
-        <li><a href="http://aric.adb.org/">Asia Regional Integration Center</a></li>
-        <li><a href="http://asianbondsonline.adb.org/">Asian Bonds Online</a></li>
-        <li><a href="http://aienetwork.org/">Asian International Economists Network</a></li>
-        <li class="last"><a href="http://blogs.adb.org/">Asian Development Blog</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="column last">
-    <h4>Alerts and Mobile Apps</h4>
-    <div>
-      <h4>e-Alerts</h4>
-      <p><a href="http://alerts.adb.org/">Sign up to our e-mail alerts</a> or <a href="http://adbdev.org/rss">subscribe to our RSS feeds</a> to get the latest information from ADB.</p>
-      <h4>ADB Mobile Apps</h4>
-      <p>Get up-to-date news, information, and multimedia content on your mobile device with <a href="http://adbdev.org/mobile-apps">ADB Mobile Apps</a>.</p>
-    </div>
-  </div>
-</div>
-
-<hr>
-
-<p class="footer-small-print">ADB encourages websites and blogs to link to its web pages. Articles may be republished without alteration with the attribution statement “This article was first published by the Asian Development Bank (www.adb.org)" and a clickable link back to adb.org.</p>
-    </footer>
-  </div>
-
-</div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.jQuery || document.write("<script src='http://adbdev.org/sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js'>\x3C/script>")
-//--><!]]>
-</script>
-<script type="text/javascript" src="http://adbdev.org/misc/jquery.once.js?v=1.2"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.jQuery.ui || document.write("<script src='http://adbdev.org/sites/all/modules/jquery_update/replace/ui/ui/minified/jquery-ui.min.js'>\x3C/script>")
-//--><!]]>
-</script>
-<script type="text/javascript" src="http://adbdev.org/misc/drupal.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/modules/contextual/contextual.js?v=1.0"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/jquery_update/replace/ui/external/jquery.cookie.js?v=67fb34f6a866c40d0570"></script>
-<script type="text/javascript" src="http://adbdev.org/misc/form.js?v=7.30"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/jquery_ui_filter/jquery_ui_filter.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/contentanalysis/contentanalysis.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/contentoptimizer/contentoptimizer.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/jquery_ui_filter/accordion/jquery_ui_filter_accordion.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/jquery_ui_filter/tabs/jquery_ui_filter_tabs.js?nd45v2"></script>
-<!--script type="text/javascript" src="http://adbdev.org/sites/all/modules/extlink/extlink.js?nd45v2"></script-->
-<!--script type="text/javascript" src="http://admin.brightcove.com/js/BrightcoveExperiences.js"></script-->
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/image_caption/image_caption.min.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/service_links/js/favorite_services.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/google_analytics/googleanalytics.js?nd45v2"></script>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create", "UA-44074095-1", "auto");ga("send", "pageview");
-//--><!]]>
-</script>
-<script type="text/javascript" src="http://adbdev.org/misc/collapse.js?v=7.30"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/libraries/jquery.placeholder/jquery.placeholder.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/sites/all/modules/form_placeholder/form_placeholder.js?nd45v2"></script>
-<script type="text/javascript" src="http://adbdev.org/modules/toolbar/toolbar.js?nd45v2"></script>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-/*jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"adb","theme_token":"PAh4bYjzR17FzfAXjQxMtMpWDJEr6AHpF_rrr_LkaFM","js":{"https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.8.2\/jquery.min.js":1,"0":1,"misc\/jquery.once.js":1,"https:\/\/ajax.googleapis.com\/ajax\/libs\/jqueryui\/1.10.2\/jquery-ui.min.js":1,"1":1,"misc\/drupal.js":1,"modules\/contextual\/contextual.js":1,"sites\/all\/modules\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"misc\/form.js":1,"sites\/all\/modules\/jquery_ui_filter\/jquery_ui_filter.js":1,"sites\/all\/modules\/contentanalysis\/contentanalysis.js":1,"sites\/all\/modules\/contentoptimizer\/contentoptimizer.js":1,"sites\/all\/modules\/jquery_ui_filter\/accordion\/jquery_ui_filter_accordion.js":1,"sites\/all\/modules\/jquery_ui_filter\/tabs\/jquery_ui_filter_tabs.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"http:\/\/admin.brightcove.com\/js\/BrightcoveExperiences.js":1,"sites\/all\/modules\/image_caption\/image_caption.min.js":1,"sites\/all\/modules\/service_links\/js\/favorite_services.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"2":1,"misc\/collapse.js":1,"sites\/all\/libraries\/jquery.placeholder\/jquery.placeholder.js":1,"sites\/all\/modules\/form_placeholder\/form_placeholder.js":1,"modules\/toolbar\/toolbar.js":1},"css":{"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.accordion.css":1,"misc\/ui\/jquery.ui.tabs.css":1,"modules\/contextual\/contextual.css":1,"sites\/all\/modules\/access_unpublished\/css\/access_unpublished.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/easychart\/plugins\/css\/plugin.css":1,"modules\/shortcut\/shortcut.css":1,"modules\/toolbar\/toolbar.css":1,"sites\/all\/themes\/adb\/css\/adb.css":1,"sites\/all\/themes\/adb\/css\/custom.css":1,"sites\/all\/themes\/adb\/css\/custom-guido.css":1}},"jQueryUiFilter":{"disabled":0,"accordionHeaderTag":"h3","accordionOptions":{"active":0,"animated":"slide","autoHeight":"true","clearStyle":"false","collapsible":"false","event":"click","scrollTo":0,"history":"false"},"tabsOptions":{"collapsible":"false","event":"click","fx":0,"paging":0,"selected":"","scrollTo":0,"history":"false"},"tabsHeaderTag":"h3"},"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":0,"extExclude":"(adbdev\\.org)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external website. This link from ADB.org does not imply endorsement to the website, nor does the bank provide any guarantees relating to the completeness or accuracy of information in this website.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"},"form_placeholder":{"fallback_support":true,"include":"#edit-keywords","exclude":"","required_indicator":"append"},"tableHeaderOffset":"Drupal.toolbar.height"});*/
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"adb","theme_token":"PAh4bYjzR17FzfAXjQxMtMpWDJEr6AHpF_rrr_LkaFM","js":{"https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.8.2\/jquery.min.js":1,"0":1,"misc\/jquery.once.js":1,"https:\/\/ajax.googleapis.com\/ajax\/libs\/jqueryui\/1.10.2\/jquery-ui.min.js":1,"1":1,"misc\/drupal.js":1,"modules\/contextual\/contextual.js":1,"sites\/all\/modules\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"misc\/form.js":1,"sites\/all\/modules\/jquery_ui_filter\/jquery_ui_filter.js":1,"sites\/all\/modules\/contentanalysis\/contentanalysis.js":1,"sites\/all\/modules\/contentoptimizer\/contentoptimizer.js":1,"sites\/all\/modules\/jquery_ui_filter\/accordion\/jquery_ui_filter_accordion.js":1,"sites\/all\/modules\/jquery_ui_filter\/tabs\/jquery_ui_filter_tabs.js":1,"sites\/all\/modules\/image_caption\/image_caption.min.js":1,"sites\/all\/modules\/service_links\/js\/favorite_services.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"2":1,"misc\/collapse.js":1,"sites\/all\/libraries\/jquery.placeholder\/jquery.placeholder.js":1,"sites\/all\/modules\/form_placeholder\/form_placeholder.js":1,"modules\/toolbar\/toolbar.js":1},"css":{"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.accordion.css":1,"misc\/ui\/jquery.ui.tabs.css":1,"modules\/contextual\/contextual.css":1,"sites\/all\/modules\/access_unpublished\/css\/access_unpublished.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/easychart\/plugins\/css\/plugin.css":1,"modules\/shortcut\/shortcut.css":1,"modules\/toolbar\/toolbar.css":1,"sites\/all\/themes\/adb\/css\/adb.css":1,"sites\/all\/themes\/adb\/css\/custom.css":1,"sites\/all\/themes\/adb\/css\/custom-guido.css":1}},"jQueryUiFilter":{"disabled":0,"accordionHeaderTag":"h3","accordionOptions":{"active":0,"animated":"slide","autoHeight":"true","clearStyle":"false","collapsible":"false","event":"click","scrollTo":0,"history":"false"},"tabsOptions":{"collapsible":"false","event":"click","fx":0,"paging":0,"selected":"","scrollTo":0,"history":"false"},"tabsHeaderTag":"h3"},"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":0,"extExclude":"(adbdev\\.org)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external website. This link from ADB.org does not imply endorsement to the website, nor does the bank provide any guarantees relating to the completeness or accuracy of information in this website.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"},"form_placeholder":{"fallback_support":true,"include":"#edit-keywords","exclude":"","required_indicator":"append"},"tableHeaderOffset":"Drupal.toolbar.height"});
-//--><!]]>
-</script>
-  <script>
-    Modernizr.load([
-      {
-          test: window.matchMedia,
-          nope: ["/sites/all/themes/adb/js/vendor/media.match.min.js", "/sites/all/themes/adb/js/vendor/selectivizr.min.js"]
-      },
-      "/sites/all/themes/adb/js/plugins.min.js",
-      "/sites/all/themes/adb/js/adb.js"
-    ]);
-    </script> 
-  </body>
-</html>
