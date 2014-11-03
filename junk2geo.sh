@@ -206,7 +206,7 @@ function get_allnames {
 		wc -l
 	)
 	## DELETE
-	echo $allnamestmp
+	#echo $allnamestmp
 }
 export -f get_allnames
 
@@ -280,7 +280,7 @@ function get_doc {
 		table=allCountries
 	fi
 	## DELETE
-	echo $tmpdoc
+	#echo $tmpdoc
 }
 export -f get_doc
 
@@ -308,7 +308,7 @@ function choose_geo_candidates {
 		geocandidatestmp=$allnamestmp
 	fi
 	## DELETE
-	echo $geocandidatestmp
+	#echo $geocandidatestmp
 }
 export -f choose_geo_candidates
 
@@ -365,7 +365,8 @@ function get_matches {
 					# remove tre-agrep match character range
 					sed "s/^[0-9]\+-[0-9]\+://g"
 				)
-				echo -e "$geo\t$match\t$body" >> $matchtmp
+				# print the geonameid, geoname, matched text, iso2 list, and record matched text came from
+				echo -e "$geo\t$match\t"$table"\t$body" >> $matchtmp
 			fi
 		done
 	done < $geocandidatestmp
@@ -405,7 +406,7 @@ function get_geonames {
 		if [[ $( cat $geocandidatestmp | wc -l ) -gt 0 ]]; then
 			get_matches
 			if [[ $( cat $matchtmp | wc -l ) -gt 0 ]]; then
-				echo "$matchtmp"
+				cat "$matchtmp"
 			fi
 		fi
 	'
