@@ -115,3 +115,9 @@ The list is a sbuset according to these rules:
 * only 1-grams were considered
 * must be greater than 3 characters
 * must have more than 10,000 matches since 1991
+
+Acknowledgements
+================
+
+The Levenshtein distance script is by [Martin Schimmels](http://code.activestate.com/recipes/576874-levenshtein-distance/) and is under the [MIT License](http://opensource.org/licenses/MIT).
+The Double Metaphone script is by [Steve Lacy](https://github.com/slacy/double-metaphone) and is under the [Artistic License](http://dev.perl.org/licenses/artistic.html).
