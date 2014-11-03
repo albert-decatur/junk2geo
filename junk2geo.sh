@@ -14,6 +14,7 @@
 # test that all flag combinations work
 # remove geonames that have **better** matches for the same match text and the same input record, eg match text is "govine", one output geoname is "Govine" the other is "Rovine", remove "Rovine"
 # include input iso2s in output
+# handle html encoding
 
 usage()
 {
@@ -278,7 +279,7 @@ function get_doc {
 		table=allCountries
 	fi
 	## DELETE
-	echo $tmpdoc
+	#echo $tmpdoc
 }
 export -f get_doc
 
