@@ -206,15 +206,16 @@ function get_allnames {
 		wc -l
 	)
 	## DELETE
-	#echo $allnamestmp
+	echo $allnamestmp
 }
 export -f get_allnames
 
 function get_doc {
 	# just in case table is allCountries set it to null so get can match the right records
-	if [[ $table -eq "allCountries" ]]; then
+	if [[ "$table" == "allCountries" ]]; then
 		table=
 	fi
+	echo $table
 	# get all text from input TSV that relates to this list of ISO2s
 	doc=$( 
 		# not sure why this tab cant be \t
@@ -279,7 +280,7 @@ function get_doc {
 		table=allCountries
 	fi
 	## DELETE
-	#echo $tmpdoc
+	echo $tmpdoc
 }
 export -f get_doc
 
@@ -307,7 +308,7 @@ function choose_geo_candidates {
 		geocandidatestmp=$allnamestmp
 	fi
 	## DELETE
-	#echo $geocandidatestmp
+	echo $geocandidatestmp
 }
 export -f choose_geo_candidates
 
