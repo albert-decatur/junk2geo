@@ -34,7 +34,7 @@ OPTIONS:
    -d      full path to double metaphone script, using https://github.com/slacy/double-metaphone
    -l      full path to levenshtein distance script, using https://github.com/albert-decatur/as-seen-online/blob/master/levenshtein.py
 
-Example use: $0 -i matches.tsv -s stopwords/google_1grams_lengthGT2_countGT3000_yearGE1990.tsv -d /opt/double-metaphone/dmtest -l /usr/local/bin/levenshtein.py > metrics.tsv
+Example use: $0 -i test/nepal/np_matches.tsv -s stopwords/google_1grams_lengthGT2_countGT3000_yearGE1990.tsv -d /opt/double-metaphone/dmtest -l /usr/local/bin/levenshtein.py > metrics.tsv
 Note that field headers must literally be "match_text" and "placename".
 This is also the junk2geo output default.
 
