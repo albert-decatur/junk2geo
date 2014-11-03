@@ -49,10 +49,11 @@ Prerequisites
 * agrep
 * tre-agrep
 * mawk
-* csvkit
-  * for csvjoin
 * moreutils
-  * for mktemp
+  * for mktemp and sponge
+* wdiff
+* [Levenshtein distance](https://github.com/albert-decatur/as-seen-online/blob/master/levenshtein.py) 
+* [Double Metaphone](https://github.com/slacy/double-metaphone)
 
 Why agrep **and** tre-agrep?  The first is very fast, and the second can show you the exact pattern that was matched.
 

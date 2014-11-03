@@ -10,33 +10,141 @@
 #	6. Levenshtein distance (higher is greater difference). Reports Levenshtein distance.
 #	7. count of Double Metaphone codes that are the same between match_text and placename. Max is 2, min is 0.
 #
-# NB: makes sense to just use unique match_text / placename combinations with this script and match back later.
-# TODO: user provides names of fields, path to levenshtein and double metaphone scripts, field delimiter, localhost assumed if no list of hosts given
-# user args: 1) input pipe separated file with the fields 'placename' and 'match_text' **with header**, 2) list of stopwords in any languages, one word per line, 3) comma separated list of hosts to run on with GNU parallel (NB: semicolon is localhost)
-# example use: $0 uniq_matches.txt stopwords_en_es_fr_pt.txt :,128.239.103.87,128.239.121.175,grover.itpir.wm.edu,128.239.124.103,cookiemonster.itpir.wm.edu
+# TODO
+# user provides names of fields, path to levenshtein and double metaphone scripts, field delimiter, localhost assumed if no list of hosts given
+# allow to run on multiple hosts.  may have to use -trc w/ parallel
+# NB: makes sense to just use unique match_text / placename combinations with this script and match back later even if user doesn't provide these
 
-intxt=$1
-stopwords=$2
-hosts=$3
+usage()
+{
+cat << EOF
+usage: $0 -i input.tsv -s stopwords.txt -d /path/to/doubleMetaphone -l /path/to/levensteinDistance [-b user@example_host.org,user@example_host2.org]
+
+Record a series of string metrics for junk2geo matches.
+These can later be filtered to find a combination of metrics that yield highest accuracy.
+This is somehwat qualitative, but can be backed up by accuracy assessment of filtered outputs.
+For example, match_text and placenames must sound alike according to Double Metaphone, and the ratio of Levenshtein distance to match_text length is below 0.2.
+To use, pass the output fields "match_text" and "placename" from junk2geo.sh as a TSV to this script use the '-i' flag.
+
+OPTIONS:
+   -h      show this message
+   -i      input TSV with just two fields: match_text, placename from junk2geo
+   -s      input stopword list, one term per line.  building good stopword list is key.
+   -b      boxes (hosts) to run this scrip on.  defaults to localhost if none given
+   -d      full path to double metaphone script, using https://github.com/slacy/double-metaphone
+   -l      full path to levenshtein distance script, using https://github.com/albert-decatur/as-seen-online/blob/master/levenshtein.py
+
+Example use: $0 -i matches.tsv -s stopwords/google_ngrams.tsv -d /opt/double-metaphone/dmtest -l /usr/local/bin/levenshtein.py > metrics.tsv
+Note that field headers must literally be "match_text" and "placename".
+This is also the junk2geo output default.
+
+EOF
+}
+
+while getopts "hi:s:b:d:l:" OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         i)
+             intxt=$OPTARG
+             ;;
+         s)
+             stopwords=$OPTARG
+             ;;
+         b)
+             boxes=$OPTARG
+             ;;
+         d)
+             dm_path=$OPTARG
+             ;;
+         l)
+             lev_path=$OPTARG
+             ;;
+     esac
+done
+
+# define functions used by GNU parallel
+function identical { 
+	if [[ "$1" == "$2" ]]; then 
+		echo 1
+	fi
+}
+export -f identical
+
+function as_whitepunctcase { 
+	echo $1 |\
+	tr -d "[:punct:]" |\
+	sed "s:[ \t]\+::g" |\
+	awk "{print tolower(\$0) }"
+}
+export -f as_whitepunctcase
+
+function as_ascii { 
+	echo $1 |\
+	tr -d "[:punct:]" |\
+	sed "s:[ \t]\+::g" |\
+	awk "{print tolower(\$0) }" |\
+	iconv -c -f utf8 -t ASCII//TRANSLIT |\
+	grep -oE "[A-Za-z]+"
+}
+export -f as_ascii
+
+function length { 
+	echo $1 |\
+	tr -d "[:punct:]" |\
+	awk "{print length(\$0)}"
+}
+export -f length
+
+function stopword { 
+	regex=$( 
+		echo $1 |\
+		tr -d "[:punct:]" 
+	)
+	grep -iE "^$regex$" $stopwords
+}
+export -f stopword
+
+function levenshtein { 
+	$lev_path "$1" "$2"
+}
+export -f levenshtein
+
+# allow diff_dm to use function extract_dm
+function diff_dm { 
+	match_text_dm=$( extract_dm 2 )
+	placename_dm=$( extract_dm 1 )
+	diff_dm=$( 
+		wdiff -1 -2 <(echo "$match_text_dm") <(echo "$placename_dm") |\
+		grep -vE "^=*$" 
+	)
+	echo "$diff_dm"
+}
+export -f diff_dm
+
+# use localhost is -b flag not used
+if [[ -z $boxes ]]; then
+	# use GNU parallel syntax for localhost
+	boxes=:
+fi
 
 # print header
-echo "match_text|placename|identical|as_whitepunctcase|as_ascii|length_match|is_stopword|levenshtein_dist|count_dm_agree"
+echo -e "match_text\tplacename\tidentical\tas_whitepunctcase\tas_ascii\tlength_match\tis_stopword\tlevenshtein_dist\tcount_dm_agree"
 
 cat $intxt |\
+# remove slashes for GNU parallel
 sed 's:\/::g' |\
-parallel --gnu -S "$hosts" --trim n --colsep '\|' --header : '
-	function identical { if [[ "$1" == "$2" ]]; then echo 1; fi; }
-	function as_whitepunctcase { echo $1 | tr -d "[:punct:]" | sed "s:[ \t]\+::g" | awk "{print tolower(\$0) }";}
-	function as_ascii { echo $1 | tr -d "[:punct:]" | sed "s:[ \t]\+::g" | awk "{print tolower(\$0) }" | iconv -c -f utf8 -t ASCII//TRANSLIT | grep -oE "[A-Za-z]+";}
-	function length { echo $1 | tr -d "[:punct:]" | awk "{print length(\$0)}";}
-	function stopword { regex=$( echo $1 | tr -d "[:punct:]" ); grep -iE "^$regex$" '$stopwords'; }
-	function levenshtein { /usr/local/bin/levenshtein.py "$1" "$2"; }
-	function extract_dm { /opt/double-metaphone/dmtest <( echo -e "{match_text}\n{placename}" | sed "s:,::g" ) | awk -F, "{OFS=\"\t\";print \$2,\$3}" | sed "$1d" | tr "\t" "\n" ; }
+parallel --gnu -S "$boxes" --trim n --colsep '\t' --header : '
+	# double metaphone function uses field names so keeping inside gnu parallel
+	function extract_dm { '$dm_path' <( echo -e "{match_text}\n{placename}" | sed "s:,::g" ) | awk -F, "{OFS=\"\t\";print \$2,\$3}" | sed "$1d" | tr "\t" "\n" ; }
 	export -f extract_dm
-	# allow diff_dm to use function extract_dm
-	function diff_dm { match_text_dm=$( extract_dm 2 ); placename_dm=$( extract_dm 1 ); diff_dm=$( wdiff -1 -2 <(echo "$match_text_dm") <(echo "$placename_dm") | grep -vE "^=*$" ); echo "$diff_dm"; }
-	function printall { echo {match_text}"|"{placename};}
-	
+	# define variables for function outside parallel
+	stopwords='$stopwords'
+	dm_path='$dm_path'
+	lev_path='$lev_path'
 	identical=$( identical {match_text} {placename} )
 	if [[ -z $identical ]]; then
 		identical=0
@@ -71,5 +179,5 @@ parallel --gnu -S "$hosts" --trim n --colsep '\|' --header : '
 
 	count_dm_agree=$( diff_dm | grep -vE "^$" | wc -l )
 
-	echo $(printall)"|$identical|$as_whitepunctcase|$as_ascii|$length_match|$is_stopword|$levenshtein_dist|$count_dm_agree"
+	echo -e {match_text}"\t"{placename}"\t$identical\t$as_whitepunctcase\t$as_ascii\t$length_match\t$is_stopword\t$levenshtein_dist\t$count_dm_agree"
 '
