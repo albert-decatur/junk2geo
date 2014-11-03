@@ -65,6 +65,10 @@ sudo apt-get install parallel agrep tre-agrep mawk
 git clone https://github.com/albert-decatur/junk2geo.git
 cd junk2geo/
 chmod +x *.sh
+# compile double metaphone algorithm in submodule
+cd double-metaphone/
+make
+cd ..
 ./junk2geo.sh -g geonames/geonames_2014-10-02.sqlite -i test/test.tsv > output.tsv
 ./match_metrics.sh output.tsv > metrics.tsv
 ./match_metrics.sh metrics.tsv -l 3 -m 1 -s 4 -a > worthy_matches.tsv

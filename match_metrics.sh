@@ -31,10 +31,10 @@ OPTIONS:
    -i      input TSV with just two fields: match_text, placename from junk2geo
    -s      input stopword list, one term per line.  building good stopword list is key.
    -b      boxes (hosts) to run this scrip on.  defaults to localhost if none given
-   -d      full path to double metaphone script, using https://github.com/slacy/double-metaphone
-   -l      full path to levenshtein distance script, using https://github.com/albert-decatur/as-seen-online/blob/master/levenshtein.py
+   -d      full path to double metaphone script, using https://github.com/slacy/double-metaphone, available in this repo
+   -l      full path to levenshtein distance script, using https://github.com/albert-decatur/as-seen-online/blob/master/levenshtein.py, available in this repo
 
-Example use: $0 -i test/nepal/np_matches.tsv -s stopwords/google_1grams_lengthGT2_countGT3000_yearGE1990.tsv -d /opt/double-metaphone/dmtest -l /usr/local/bin/levenshtein.py > metrics.tsv
+Example use: $0 -i test/nepal/np_matches.tsv -s stopwords/google_1grams_lengthGT2_countGT3000_yearGE1990.tsv -d double-metaphone/dmtest -l levenshtein/levenshtein.py > metrics.tsv
 Note that field headers must literally be "match_text" and "placename".
 This is also the junk2geo output default.
 
