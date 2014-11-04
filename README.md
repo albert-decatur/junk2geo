@@ -136,8 +136,8 @@ These stopword lists come from Google's English One Million N-grams:
 * google_1grams_lengthGT2_countGT3000_yearGE1990.tsv
 
 These are 1-grams, and both of them require a 1-gram length greater than 2.
-The first requires a count greater than 10,000 after the year 1990,
-and the second requires a count greater than 3000 after the year 1990.
+The first requires a count greater than 10,000 after the year 1989,
+and the second requires a count greater than 3000 after the year 1989.
 The second list is of course much larger.
 
 Acknowledgements
