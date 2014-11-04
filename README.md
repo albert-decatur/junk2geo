@@ -64,8 +64,9 @@ How To
 sudo apt-get install agrep tre-agrep mawk moreutils
 # moreutils has a util called parallel, but this is not GNU parallel
 sudo rm $(which parallel)
-# now install GNU parallel
-sudo apt-get install parallel
+# to use the GNU parallel from this repo just use parallel-20121122/src/parallel
+# however, you may have to compile from source.  for that see instructions below
+sudo cp src/parallel /usr/bin/parallel
 # get this repo
 git clone https://github.com/albert-decatur/junk2geo.git
 cd junk2geo/
@@ -78,6 +79,17 @@ cd ..
 ./junk2geo.sh -g geonames/geonames_2014-10-02.sqlite -i test/test.tsv > output.tsv
 ./match_metrics.sh output.tsv > metrics.tsv
 ./match_metrics.sh metrics.tsv -l 3 -m 1 -s 4 -a > worthy_matches.tsv
+```
+
+To install GNU parallel from scratch:
+```bash
+wget -c http://ftp.gnu.org/gnu/parallel/parallel-20121122.tar.bz2
+tar jxvf parallel-20121122.tar.bz2
+cd parallel-20121122/
+./configure && make && make install
+# moreutils has a util called parallel, but this is not GNU parallel
+sudo rm $(which parallel)
+sudo cp src/parallel /usr/bin/parallel
 ```
 
 Scripts are separated such that slow tasks can be run once, but faster tasks like filtering by quality metrics can be repeated easily and quickly.
