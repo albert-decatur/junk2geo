@@ -61,9 +61,15 @@ How To
 ======
 
 ```bash
-sudo apt-get install parallel agrep tre-agrep mawk
+sudo apt-get install agrep tre-agrep mawk moreutils
+# moreutils has a util called parallel, but this is not GNU parallel
+sudo rm $(which parallel)
+# now install GNU parallel
+sudo apt-get install parallel
+# get this repo
 git clone https://github.com/albert-decatur/junk2geo.git
 cd junk2geo/
+# make scripts executable
 chmod +x *.sh
 # compile double metaphone algorithm in submodule
 cd double-metaphone/
