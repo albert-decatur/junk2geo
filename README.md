@@ -76,9 +76,13 @@ chmod +x *.sh
 cd double-metaphone/
 make
 cd ..
-./junk2geo.sh -g geonames/geonames_2014-10-02.sqlite -i test/test.tsv > output.tsv
+# time to geocode test inputs
+# use alternate names from geonames, use a stopwords list, allow for 1 error in fuzzy text match
+# disallow matches of length 2 or less
+./junk2geo.sh -a -l 2 -e 1 -g geonames/geonames_2014-10-02.sqlite \                                                            
+-S stopwords/stopwords_en_es_fr_pt_de_it.txt\                                                                                  
+-i test/crs/crs2014-06-16_sample.tsv > output.tsv         
 ./match_metrics.sh output.tsv > metrics.tsv
-./match_metrics.sh metrics.tsv -l 3 -m 1 -s 4 -a > worthy_matches.tsv
 ```
 
 To install GNU parallel from scratch:
