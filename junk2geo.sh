@@ -15,6 +15,8 @@
 # remove geonames that have **better** matches for the same match text and the same input record, eg match text is "govine", one output geoname is "Govine" the other is "Rovine", remove "Rovine"
 # include input iso2s in output
 # handle html encoding
+# filtering acceptable matches must be iso2 group by iso2 group.  this becomes obvious when you look at global geocoding output - its much trasier than the rest and you don't want to join all its matches back to everything else
+# print iso2s for output each record
 
 usage()
 {
@@ -366,6 +368,7 @@ function get_matches {
 					sed "s/^[0-9]\+-[0-9]\+://g"
 				)
 				# print the geonameid, geoname, matched text, iso2 list, and record matched text came from
+				# need iso2 to appear for each record
 				echo -e "$geo\t$match\t"$table"\t$body" >> $matchtmp
 			fi
 		done
