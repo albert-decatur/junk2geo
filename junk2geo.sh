@@ -16,7 +16,8 @@
 # include input iso2s in output
 # handle html encoding
 # filtering acceptable matches must be iso2 group by iso2 group.  this becomes obvious when you look at global geocoding output - its much trasier than the rest and you don't want to join all its matches back to everything else
-# do not print table above matchtmp output
+# do not print table name above matchtmp output
+# print header, using geonameid\tplacename\tmatch_text\tiso2s
 
 usage()
 {
