@@ -127,8 +127,13 @@ match_metrics.sh
 2. filter out geonames candidates according to poor performance in metrics of your choice (eg, sound does not match according to Double Metaphone)
 3. remove duplicate geonames for the same place (eg a place that was matched in both Italian and Spanish should appear as a single match)
 
-Notes
-=====
+
+Acknowledgements
+================
+
+The Levenshtein distance script is by [Martin Schimmels](http://code.activestate.com/recipes/576874-levenshtein-distance/) and is under the [MIT License](http://opensource.org/licenses/MIT).
+
+The Double Metaphone script is by [Steve Lacy](https://github.com/slacy/double-metaphone) and is under the [Artistic License](http://dev.perl.org/licenses/artistic.html).
 
 These stopword lists come from Google's English One Million N-grams:
 
@@ -139,9 +144,3 @@ These are 1-grams, and both of them require a 1-gram length greater than 2.
 The first requires a count greater than 10,000 after the year 1989,
 and the second requires a count greater than 3000 after the year 1989.
 The second list is of course much larger.
-
-Acknowledgements
-================
-
-The Levenshtein distance script is by [Martin Schimmels](http://code.activestate.com/recipes/576874-levenshtein-distance/) and is under the [MIT License](http://opensource.org/licenses/MIT).
-The Double Metaphone script is by [Steve Lacy](https://github.com/slacy/double-metaphone) and is under the [Artistic License](http://dev.perl.org/licenses/artistic.html).
