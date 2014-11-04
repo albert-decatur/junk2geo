@@ -16,7 +16,7 @@
 # include input iso2s in output
 # handle html encoding
 # filtering acceptable matches must be iso2 group by iso2 group.  this becomes obvious when you look at global geocoding output - its much trasier than the rest and you don't want to join all its matches back to everything else
-# print iso2s for output each record
+# do not print table above matchtmp output
 
 usage()
 {
@@ -368,7 +368,8 @@ function get_matches {
 					sed "s/^[0-9]\+-[0-9]\+://g"
 				)
 				# print the geonameid, geoname, matched text, iso2 list, and record matched text came from
-				# need iso2 to appear for each record
+				# stop table name from being printed above matchtmp output
+				# might be happening because some records have nothing but table name?
 				echo -e "$geo\t$match\t"$table"\t$body" >> $matchtmp
 			fi
 		done
