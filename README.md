@@ -130,13 +130,15 @@ match_metrics.sh
 Notes
 =====
 
-The stopword list called 'google_ngrams.tsv'
-is from Google N-grams English One Million.
-The list is a sbuset according to these rules:
+These stopword lists come from Google's English One Million N-grams:
 
-* only 1-grams were considered
-* must be greater than 3 characters
-* must have more than 10,000 matches since 1991
+* google_1grams_lengthGT2_countGT10000_yearGE1990.tsv
+* google_1grams_lengthGT2_countGT3000_yearGE1990.tsv
+
+These are 1-grams, and both of them require a 1-gram length greater than 2.
+The first requires a count greater than 10,000 after the year 1990,
+and the second requires a count greater than 3000 after the year 1990.
+The second list is of course much larger.
 
 Acknowledgements
 ================
