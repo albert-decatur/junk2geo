@@ -33,8 +33,8 @@ OPTIONS:
    -e      number of errors to allow in matched text
    -g      input GeoNames SQLite database made by https://github.com/albert-decatur/geonames2sqlite
    -i      input TSV to geocode, with two columns: 1) country ISO2(s), 2) text to geocode
-   -d      drop the ISO2 subset tables based on GeoNames' allCountries. Warning: these can take several minutes to recreate
-   -a      use GeoNames alternate names as well as "name" and "asciiname".  Altnerate names are in as many languages as possible
+   -d      drop the ISO2 subset DBs based on GeoNames' allCountries and the intermediate stopwords list /tmp/stopwords.txt. Warning: these can take several minutes to recreate
+   -a      use GeoNames alternate names and name field as well as "asciiname".  Altnerate names are in as many languages as possible
    -s      do not allow any terms from this list of stopwords to be considered a match.  One line per stopword. Consider this a blacklist.
    -S      same as -s but intended for a very large list of stopwords.  This flag will make a temporary stopword list composed only of terms that appear at least once in the input TSV. If a /tmp/stopwords exists it will be used. Cannot be used with -s.
    -l      match must be at least this length to be considered a candidate.  Very short matches are typically junk, but you may miss out on very short placenames
@@ -42,7 +42,15 @@ OPTIONS:
 Multiple values of ISO2 ought to be pipe separated in the first column of the input TSV (using the -i flag) like so: IR|US|CN.
 If no ISO2 is appropriate simply do not include any.  However, terms for all of GeoNames will be searched so try to include some ISO2s where you can. A whole continent worth of ISO2s is much better than trying to geocode from the whole earth.
 The '-S' flag will make a temporary stopword list at /tmp/stopwords.  This is in case you want to preserve this list.
-Example use: $0 -e 1 -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
+
+##Example uses##
+
+Require exact matches:
+$0 -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
+Allow for a single error in fuzzy text match and use a stopwords list and max length:
+$0 -e 1 -s stopwords/stopwords.txt -l 2 -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
+Use alternate names, and "name" as well as "asciiname", but require exact match with these:
+$0 -a -g geonames/geonames_2014-10-02.sqlite -i test/crs2014-06-16_sample.tsv
 
 EOF
 }
@@ -115,7 +123,7 @@ function mk_iso2_tables {
 	# this strategy presumes that queries will be used many times each
 	# note that the -j flag controls number of simultaneous jobs, and SQLite's lock prevents use from doing more than one job at once on a given host
 	# one work around would actually be to write these tables to new SQLite dbs, probably under a $(mktemp -d)
-	parallel -j 1 --gnu '
+	parallel --gnu '
 		iso2s=$( echo {} | tr "|" "\n" )
 		# if ISO2 list is not blank (which signifies use all ISO2) then write the SQL to make a table with all of the allCountries table given those ISO2
 		if [[ -n $( echo "$iso2s" | grep -vE "^$" ) ]]; then 
@@ -127,8 +135,7 @@ function mk_iso2_tables {
 				sed "s:^:CREATE TABLE IF NOT EXISTS \"{}\" AS SELECT geonameid,name,asciiname,alternatenames FROM allCountries WHERE :g;s:$:\;:g"
 			)
 		fi
-		echo "$sql"|\
-		sqlite3 '$geonames'
+		echo "$sql"
 	'
 }
 
@@ -371,7 +378,7 @@ function get_matches {
 				# print the geonameid, geoname, matched text, iso2 list, and record matched text came from
 				# stop table name from being printed above matchtmp output
 				# might be happening because some records have nothing but table name?
-				echo -e "$geo\t$match\t"$table"\t$body" >> $matchtmp
+				echo -e "$geo\t$match\t$table" >> $matchtmp
 			fi
 		done
 	done < $geocandidatestmp
@@ -411,19 +418,23 @@ function get_geonames {
 		if [[ $( cat $geocandidatestmp | wc -l ) -gt 0 ]]; then
 			get_matches
 			if [[ $( cat $matchtmp | wc -l ) -gt 0 ]]; then
-				cat "$matchtmp"
+				# take geonameid/placename/match_text/iso2 combos just once
+				cat "$matchtmp" |\
+				sort |\
+				uniq
 			fi
 		fi
 	'
 }
 
 set_flags
-if [[ $use_big_stopwords -eq 1 ]]; then
-	big_stopwords
-fi
-if [[ $drop_iso2_tables -eq 1 ]]; then
-	rm_iso2_tables
-else
-	mk_iso2_tables
-fi
-get_geonames
+mk_iso2_tables
+#if [[ $use_big_stopwords -eq 1 ]]; then
+#	big_stopwords
+#fi
+#if [[ $drop_iso2_tables -eq 1 ]]; then
+#	rm_iso2_tables
+#else
+#	mk_iso2_tables
+#fi
+#get_geonames

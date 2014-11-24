@@ -45,6 +45,7 @@ Many faster solutions exist which work well on inputs that have rich context and
 Prerequisites
 =============
 
+* SQLite 3
 * GNU parallel
 * agrep
 * tre-agrep
